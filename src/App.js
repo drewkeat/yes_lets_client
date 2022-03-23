@@ -1,6 +1,11 @@
+import { BrowserRouter as Router } from 'react-router-dom';
+import RoutesConfig from './RoutesConfig';
+
 function App() {
   return (
-    <h1>Welcome to Yes, let's</h1>
+    <Router>
+      <RoutesConfig />
+    </Router>
   );
 }
 

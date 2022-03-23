@@ -1,11 +1,10 @@
-const initialState = {}
+const initialState = {};
 
 const Users = (state = initialState, { type, payload }) => {
   switch (type) {
-
-  default:
-    return state
+    default:
+      return state;
   }
-}
+};
 
-export default Users
+export default Users;

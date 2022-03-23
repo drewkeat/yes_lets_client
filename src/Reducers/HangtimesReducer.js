@@ -1,11 +1,10 @@
-const initialState = {}
+const initialState = {};
 
 const Hangtimes = (state = initialState, { type, payload }) => {
   switch (type) {
-
-  default:
-    return state
+    default:
+      return state;
   }
-}
+};
 
-export default Hangtimes
+export default Hangtimes;

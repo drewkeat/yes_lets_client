@@ -1,17 +1,31 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import React, { Component } from "react";
-
 export class Landing extends Component {
   render() {
     return (
-      <div>
-        <Typography variant="h1" align="center">
+      <Grid
+        container
+        direction="column"
+        columns={{ xs: 1, sm: 2 }}
+        minHeight={"100vh"}
+        minWidth="100%"
+      >
+        <Typography
+          id="header"
+          variant="h1"
+          align="center"
+          minWidth={"100%"}
+          flexGrow={0}
+        >
           Yes, Lets!
         </Typography>
-        <Box display="flex" alignContent="center" justifyContent="center">
-          <Button variant="contained">Click Me</Button>
-        </Box>
-      </div>
+        <Box
+          flexGrow={1}
+          width="100%"
+          minHeight="100%"
+          backgroundColor="primary.main"
+        ></Box>
+      </Grid>
     );
   }
 }

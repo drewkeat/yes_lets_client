@@ -1,31 +1,12 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 import React, { Component } from "react";
+import UserForm from "../Components/UserForm";
 export class Landing extends Component {
   render() {
     return (
-      <Grid
-        container
-        direction="column"
-        columns={{ xs: 1, sm: 2 }}
-        minHeight={"100vh"}
-        minWidth="100%"
-      >
-        <Typography
-          id="header"
-          variant="h1"
-          align="center"
-          minWidth={"100%"}
-          flexGrow={0}
-        >
-          Yes, Lets!
-        </Typography>
-        <Box
-          flexGrow={1}
-          width="100%"
-          minHeight="100%"
-          backgroundColor="primary.main"
-        ></Box>
-      </Grid>
+      <Container sx={{ width: "80vw", height: "80vh" }}>
+        <UserForm />
+      </Container>
     );
   }
 }

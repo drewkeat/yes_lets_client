@@ -7,18 +7,17 @@ const UserForm = () => {
   const initialValues = {
     first: "",
     last: "",
-    phone: "",
     email: "",
     password: "",
   };
   const userSchema = Yup.object().shape({
     first: Yup.string().required("First name is required"),
     last: Yup.string().required("Last name is required"),
-    phone: Yup.string().required(),
     email: Yup.string().email("Invalid email").required("Email is required"),
     password: Yup.string().required("Password required"),
   });
   const handleSubmit = (values, { setSubmitting }) => {
+    console.log(values);
     setTimeout(() => {
       setSubmitting(false);
       alert(JSON.stringify(values, null, 2));
@@ -37,42 +36,54 @@ const UserForm = () => {
       >
         {({ submitForm, isSubmitting }) => (
           <Form>
-            <Field
-              component={TextField}
-              name="first"
-              type="text"
-              label="First Name"
-              fullWidth
-            />
-            <Field
-              component={TextField}
-              name="last"
-              type="text"
-              label="Last Name"
-              fullWidth
-            />
-            <Field
-              component={TextField}
-              name="email"
-              type="email"
-              label="Email"
-              fullWidth
-            />
-            <Field
-              component={TextField}
-              name="password"
-              type="password"
-              label="Password"
-              fullWidth
-            />
-            {isSubmitting && <LinearProgress />}
-            <Button
-              variant="contained"
-              disabled={isSubmitting}
-              onClick={submitForm}
-            >
-              Submit
-            </Button>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Field
+                  component={TextField}
+                  name="first"
+                  type="text"
+                  label="First Name"
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Field
+                  component={TextField}
+                  name="last"
+                  type="text"
+                  label="Last Name"
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Field
+                  component={TextField}
+                  name="email"
+                  type="email"
+                  label="Email"
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Field
+                  component={TextField}
+                  name="password"
+                  type="password"
+                  label="Password"
+                  fullWidth
+                />
+              </Grid>
+              {isSubmitting && <LinearProgress />}
+              <Grid item xs={12} justifyContent="center">
+                <Button
+                  variant="contained"
+                  disabled={isSubmitting}
+                  onClick={submitForm}
+                >
+                  Submit
+                </Button>
+              </Grid>
+            </Grid>
           </Form>
         )}
       </Formik>

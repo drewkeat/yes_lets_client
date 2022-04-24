@@ -27,7 +27,12 @@ const UserForm = () => {
     <Container
       component={Paper}
       elevation={3}
-      sx={{ minWidth: "100%", minHeight: "100%" }}
+      sx={{
+        minWidth: "100%",
+        minHeight: "100%",
+        padding: "1rem",
+        background: "#eee",
+      }}
     >
       <Formik
         initialValues={initialValues}

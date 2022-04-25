@@ -1,7 +1,29 @@
-import { Container } from "@mui/material";
+import { Button, Container, TextField } from "@mui/material";
 import React, { Component } from "react";
 import UserForm from "../Components/UserForm";
+import * as Yup from "yup";
 export class Landing extends Component {
+  formConfig = {
+    initialValues: {
+      first: "",
+      last: "",
+      email: "",
+      password: "",
+    },
+    userSchema: Yup.object().shape({
+      first: Yup.string().required("First name is required"),
+      last: Yup.string().required("Last name is required"),
+      email: Yup.string().email("Invalid email").required("Email is required"),
+      password: Yup.string().required("Password required"),
+    }),
+    onSubmit: (values, { setSubmitting }) => {
+      console.log(values);
+      setTimeout(() => {
+        setSubmitting(false);
+        alert(JSON.stringify(values, null, 2));
+      }, 5000);
+    },
+  };
   render() {
     return (
       <Container
@@ -12,19 +34,15 @@ export class Landing extends Component {
           alignContent: "center",
           justifyContent: "center",
           alignItems: "center",
-          background: "yellow",
+          background: "gold",
         }}
       >
-        <Container
-          sx={{
-            width: "80vw",
-            height: "fit-content",
-            py: "1.5rem",
-            background: "blue",
-          }}
-        >
-          <UserForm />
-        </Container>
+        <UserForm
+          width="80vw"
+          title="Sign Up"
+          formConfig={this.formConfig}
+          submitText="Sign Up"
+        />
       </Container>
     );
   }

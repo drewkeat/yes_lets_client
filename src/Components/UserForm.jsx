@@ -1,47 +1,46 @@
-import { Button, Container, Grid, LinearProgress, Paper } from "@mui/material";
+import {
+  Button,
+  Container,
+  Grid,
+  CircularProgress,
+  Paper,
+  Typography,
+} from "@mui/material";
 import { Formik, Form, Field } from "formik";
 import { TextField } from "formik-mui";
-import * as Yup from "yup";
 
-const UserForm = () => {
-  const initialValues = {
-    first: "",
-    last: "",
-    email: "",
-    password: "",
-  };
-  const userSchema = Yup.object().shape({
-    first: Yup.string().required("First name is required"),
-    last: Yup.string().required("Last name is required"),
-    email: Yup.string().email("Invalid email").required("Email is required"),
-    password: Yup.string().required("Password required"),
-  });
-  const handleSubmit = (values, { setSubmitting }) => {
-    console.log(values);
-    setTimeout(() => {
-      setSubmitting(false);
-      alert(JSON.stringify(values, null, 2));
-    }, 500);
-  };
+const UserForm = ({
+  width,
+  title,
+  formConfig,
+  submitText,
+  children,
+  ...props
+}) => {
   return (
     <Container
       component={Paper}
       elevation={3}
       sx={{
-        minWidth: "100%",
-        minHeight: "100%",
-        padding: "1rem",
+        width: width,
+        py: "1.5rem",
         background: "#eee",
       }}
     >
-      <Formik
-        initialValues={initialValues}
-        validationSchema={userSchema}
-        onSubmit={handleSubmit}
-      >
+      <Formik {...formConfig}>
         {({ submitForm, isSubmitting }) => (
           <Form>
+            <Typography variant="h4" align="center" gutterBottom>
+              {title}
+            </Typography>
             <Grid container spacing={2}>
+              {isSubmitting && (
+                <Grid container item justifyContent={"center"}>
+                  <CircularProgress />
+                </Grid>
+              )}
+              {/* uncomment below for full abstraction */}
+              {/* {children} */}
               <Grid item xs={12}>
                 <Field
                   component={TextField}
@@ -78,14 +77,13 @@ const UserForm = () => {
                   fullWidth
                 />
               </Grid>
-              {isSubmitting && <LinearProgress />}
-              <Grid item xs={12} justifyContent="center">
+              <Grid item container xs={12} justifyContent="center">
                 <Button
                   variant="contained"
                   disabled={isSubmitting}
                   onClick={submitForm}
                 >
-                  Submit
+                  {submitText}
                 </Button>
               </Grid>
             </Grid>

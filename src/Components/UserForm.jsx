@@ -39,8 +39,6 @@ const UserForm = ({
                   <CircularProgress />
                 </Grid>
               )}
-              {/* uncomment below for full abstraction */}
-              {/* {children} */}
               <Grid item xs={12}>
                 <Field
                   component={TextField}

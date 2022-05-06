@@ -1,7 +1,9 @@
-import { Button, Container, TextField } from "@mui/material";
+import { Container, TextField } from "@mui/material";
 import React, { Component } from "react";
-import UserForm from "../Components/UserForm";
+// import UserForm from "../Components/UserForm";
+import YesForm from "../Components/YesForm";
 import * as Yup from "yup";
+// import { TextField } from "formik-mui";
 export class Landing extends Component {
   formConfig = {
     initialValues: {
@@ -37,12 +39,21 @@ export class Landing extends Component {
           background: "gold",
         }}
       >
-        <UserForm
+        {/* <UserForm
           width="80vw"
           title="Sign Up"
           formConfig={this.formConfig}
           submitText="Sign Up"
-        />
+        /> */}
+        <YesForm
+          width="80vw"
+          title="Sign Up"
+          formConfig={this.formConfig}
+          submitText="Sign Up"
+        >
+          <TextField name="first" type="text" label="First Name" fullWidth />
+          <TextField name="last" type="text" label="Last Name" fullWidth />
+        </YesForm>
       </Container>
     );
   }

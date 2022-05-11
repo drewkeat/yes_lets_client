@@ -2,12 +2,12 @@ import React, { Component } from "react";
 
 class SignupForm extends Component {
   state = {
-    firstName: "",
-    lastName: "",
+    first: "",
+    last: "",
     email: "",
-    phone: "",
+    phone_number: "",
     password: "",
-    confirmPassword: "",
+    password_confirmation: "",
   };
 
   handleChange = (e) => {
@@ -41,18 +41,18 @@ class SignupForm extends Component {
           onSubmit={(e) => this.handleSubmit(e)}
         >
           <input
-            name="firstName"
+            name="first"
             type="text"
             placeholder="First Name"
             onChange={(e) => this.handleChange(e)}
-            value={this.state.firstName}
+            value={this.state.first}
           />
           <input
-            name="lastName"
+            name="last"
             type="text"
             placeholder="Last Name"
             onChange={(e) => this.handleChange(e)}
-            value={this.state.lastName}
+            value={this.state.last}
           />
           <input
             name="email"
@@ -76,11 +76,11 @@ class SignupForm extends Component {
             value={this.state.password}
           />
           <input
-            name="confirmPassword"
+            name="password_confirmation"
             type="password"
             placeholder="Confirm Password"
             onChange={(e) => this.handleChange(e)}
-            value={this.state.confirmPassword}
+            value={this.state.password_confirmation}
           />
           <button type="submit">Join</button>
           <button onClick={() => this.props.changeForm(true)}>

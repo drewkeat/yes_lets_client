@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { Landing, Other } from "./Containers";
+import { Landing, Other } from "../Containers";
 function RoutesConfig() {
   return (
     <Routes>

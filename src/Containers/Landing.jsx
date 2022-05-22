@@ -1,20 +1,22 @@
 import React, { Component } from "react";
+// import { connect } from "react-redux";
 import LoginForm from "../Components/LoginForm/LoginForm";
 import SignupForm from "../Components/SignupForm/SignupForm";
+// import { createUser } from "../Actions/userActions";
 
 export class Landing extends Component {
   state = {
-    displayForm: true,
+    displayLogin: true,
   };
 
   changeForm = (bool) => {
-    this.setState({ displayForm: bool });
+    this.setState({ displayLogin: bool });
   };
 
   render() {
     return (
       <div className="pageWrapper">
-        {this.state.displayForm ? (
+        {this.state.displayLogin ? (
           <LoginForm
             changeForm={this.changeForm}
             style={{ marginTop: "3rem" }}
@@ -23,6 +25,7 @@ export class Landing extends Component {
           <SignupForm
             changeForm={this.changeForm}
             style={{ marginTop: "3rem" }}
+            // createUser={this.props.createUser}
           />
         )}
       </div>
@@ -30,4 +33,5 @@ export class Landing extends Component {
   }
 }
 
+// export default connect(null, { createUser })(Landing);
 export default Landing;

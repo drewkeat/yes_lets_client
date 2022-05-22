@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-
+import { connect } from "react-redux";
+import { createUser } from "../../Actions/userActions";
 class SignupForm extends Component {
   state = {
     first: "",
@@ -17,7 +18,7 @@ class SignupForm extends Component {
   // TODO: Alter to transmit form values to api
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    this.props.createUser(this.state);
   };
 
   render() {
@@ -62,11 +63,11 @@ class SignupForm extends Component {
             value={this.state.email}
           />
           <input
-            name="phone"
+            name="phone_number"
             type="text"
             placeholder="Phone Number"
             onChange={(e) => this.handleChange(e)}
-            value={this.state.phone}
+            value={this.state.phone_number}
           />
           <input
             name="password"
@@ -92,4 +93,4 @@ class SignupForm extends Component {
   }
 }
 
-export default SignupForm;
+export default connect(null, { createUser })(SignupForm);

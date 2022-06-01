@@ -1,13 +1,26 @@
 import ACTIONS from "../Actions/actionTypes";
-const initialState = { loading: false, current: null };
+import normalize from "json-api-normalizer";
+
+const initialState = {
+  loading: false,
+  current: null,
+};
 
 const Users = (state = initialState, { type, payload }) => {
   switch (type) {
     case ACTIONS.ADD_USER:
-      state = { ...state, ...payload };
+      {
+        const user = normalize(payload).user;
+        return { ...state, ...user };
+      }
+      break;
     case ACTIONS.SET_CURRENT_USER:
-      let id = Object.keys(payload)[0];
-      state = { ...state, current: id };
+      {
+        const user = normalize(payload).user;
+        let id = Object.keys(user)[0];
+        return { ...state, current: id };
+      }
+      break;
     default:
       return state;
   }

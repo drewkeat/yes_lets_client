@@ -1,7 +1,6 @@
 import normalize from "json-api-normalizer";
 import ACTIONS from "./actionTypes";
 import { API_URL } from "../Utils/constants";
-// import { CALL_API } from "../Middleware/API";
 
 const createUser = (userData) => {
   return (dispatch) => {

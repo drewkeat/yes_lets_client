@@ -11,8 +11,8 @@ const createUser = (userData) => {
     })
       .then((resp) => resp.json())
       .then((json) => {
-        const data = normalize(json, API_URL + "/users");
-        dispatch({ type: ACTIONS.CREATE_USER, payload: data });
+        const data = normalize(json).user;
+        dispatch({ type: ACTIONS.ADD_USER, payload: data });
       });
   };
 };
@@ -23,7 +23,7 @@ const fetchUser = (userID) => {
       .then((resp) => resp.json())
       .then((json) => {
         let user = normalize(json).user;
-        dispatch({ type: ACTIONS.CREATE_USER, payload: user });
+        dispatch({ type: ACTIONS.ADD_USER, payload: user });
       });
   };
 };

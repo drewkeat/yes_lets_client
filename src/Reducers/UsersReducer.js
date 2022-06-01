@@ -3,8 +3,7 @@ const initialState = {};
 
 const Users = (state = initialState, { type, payload }) => {
   switch (type) {
-    case ACTIONS.CREATE_USER:
-      debugger;
+    case ACTIONS.ADD_USER:
       state = { ...state, ...payload };
     default:
       return state;

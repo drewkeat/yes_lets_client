@@ -18,4 +18,15 @@ const createUser = (userData) => {
   };
 };
 
-export { createUser };
+const fetchUser = (userID) => {
+  return (dispatch) => {
+    fetch(API_URL + "/users/" + userID)
+      .then((resp) => resp.json())
+      .then((json) => {
+        let user = normalize(json).user;
+        dispatch({ type: ACTIONS.CREATE_USER, payload: user });
+      });
+  };
+};
+
+export { createUser, fetchUser };

@@ -1,10 +1,10 @@
 import { Routes, Route } from "react-router-dom";
-import { Landing, Other } from "../Containers";
+import { Landing, Dashboard } from "../Containers";
 function RoutesConfig() {
   return (
     <Routes>
       <Route path="/" element={<Landing />} />
-      <Route path="/other" element={<Other />} />
+      <Route path="/dashboard" element={<Dashboard />} />
     </Routes>
   );
 }

@@ -11,8 +11,9 @@ const createUser = (userData) => {
     })
       .then((resp) => resp.json())
       .then((json) => {
-        const data = normalize(json).user;
-        dispatch({ type: ACTIONS.ADD_USER, payload: data });
+        const user = normalize(json).user;
+        dispatch({ type: ACTIONS.ADD_USER, payload: user });
+        dispatch({ type: ACTIONS.SET_CURRENT_USER, payload: user });
       });
   };
 };

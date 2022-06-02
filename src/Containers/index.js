@@ -1,2 +1,4 @@
-export * from "./Landing";
-export * from "./Dashboard";
+import Dashboard from "../Containers/Dashboard";
+import Landing from "../Containers/Landing";
+
+export { Dashboard, Landing };

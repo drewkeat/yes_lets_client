@@ -1,12 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-export class Dashboard extends Component {
+import { fetchUser } from "../Actions/userActions";
+
+class Dashboard extends Component {
   render() {
-    return <h1>Welcome User</h1>;
+    return (
+      <div>
+        <h1>Welcome {this.props.currentUser.attributes.fullName}</h1>
+      </div>
+    );
   }
 }
-
-export default connect((state) => {
-  return { currentUser: state.users[state.users.current] };
-})(Dashboard);
+const mapStateToProps = (state) => {
+  const currentUserID = state.users.current;
+  return {
+    currentUser: state.users[currentUserID],
+  };
+};
+export default connect(mapStateToProps)(Dashboard);

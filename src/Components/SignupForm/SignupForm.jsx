@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createUser, fetchUser } from "../../Actions/userActions";
+import { withRouter } from "../../Utils/withRouter";
 class SignupForm extends Component {
   state = {
     first: "",
@@ -18,7 +19,7 @@ class SignupForm extends Component {
   // TODO: Alter to transmit form values to api
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.createUser(this.state);
+    this.props.createUser(this.state, this.props.navigate);
   };
 
   render() {
@@ -96,4 +97,4 @@ class SignupForm extends Component {
   }
 }
 
-export default connect(null, { createUser, fetchUser })(SignupForm);
+export default connect(null, { createUser, fetchUser })(withRouter(SignupForm));

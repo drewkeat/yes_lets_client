@@ -1,3 +1,4 @@
+import ACTIONS from "../Actions/actionTypes";
 const initialState = {};
 
 const Hangtimes = (state = initialState, { type, payload }) => {

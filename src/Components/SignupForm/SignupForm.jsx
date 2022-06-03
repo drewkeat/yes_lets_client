@@ -89,7 +89,7 @@ class SignupForm extends Component {
             Back to Login
           </button>
         </form>
-        <button onClick={() => this.props.fetchUser(1)}>User 1</button>
+        <button onClick={() => this.props.fetchUser(7)}>User 1</button>
         <button onClick={() => this.props.fetchUser(2)}>User 2</button>
         <button onClick={() => this.props.fetchUser(3)}>User 3</button>
       </div>

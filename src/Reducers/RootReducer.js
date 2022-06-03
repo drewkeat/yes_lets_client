@@ -1,14 +1,14 @@
-import availabilities from "./AvailabilitiesReducer";
-import friendships from "./FriendshipsReducer";
-import hangtimes from "./HangtimesReducer";
-import users from "./UsersReducer";
+import availability from "./AvailabilitiesReducer";
+import friendship from "./FriendshipsReducer";
+import hangtime from "./HangtimesReducer";
+import user from "./UsersReducer";
 import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({
-  availabilities,
-  friendships,
-  hangtimes,
-  users,
+  availability,
+  friendship,
+  hangtime,
+  user,
 });
 
 export default rootReducer;

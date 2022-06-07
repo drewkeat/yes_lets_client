@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { createUser, fetchUser } from "../../Actions/userActions";
+import { createUser } from "../../Actions/userActions";
 import { withRouter } from "../../Utils/withRouter";
+
 class SignupForm extends Component {
   state = {
     first: "",
@@ -89,12 +90,9 @@ class SignupForm extends Component {
             Back to Login
           </button>
         </form>
-        <button onClick={() => this.props.fetchUser(1)}>User 1</button>
-        <button onClick={() => this.props.fetchUser(2)}>User 2</button>
-        <button onClick={() => this.props.fetchUser(3)}>User 3</button>
       </div>
     );
   }
 }
 
-export default connect(null, { createUser, fetchUser })(withRouter(SignupForm));
+export default connect(null, { createUser })(withRouter(SignupForm));

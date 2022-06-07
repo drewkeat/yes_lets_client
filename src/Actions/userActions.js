@@ -17,7 +17,7 @@ const createUser = (userData, navigate) => {
   };
 };
 
-const fetchUser = (userID, navigate) => {
+const fetchUser = (userID) => {
   return (dispatch) => {
     fetch(API_URL + "/users/" + userID)
       .then((resp) => resp.json())

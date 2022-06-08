@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { SmallCalendar } from "../Components/SmallCalendar/SmallCalendar";
-import { fetchUser } from "../Actions/userActions";
+// import { fetchUser } from "../Actions/userActions";
 import { selectCurrentUser } from "../Reducers/UsersSelectors";
 
 class Dashboard extends Component {

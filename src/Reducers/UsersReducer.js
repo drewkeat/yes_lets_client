@@ -8,19 +8,15 @@ const initialState = {
 
 const Users = (state = initialState, { type, payload }) => {
   switch (type) {
-    case ACTIONS.ADD_USER:
-      {
-        const user = normalize(payload).user;
-        return { ...state, ...user };
-      }
-      break;
-    case ACTIONS.SET_CURRENT_USER:
-      {
-        const user = normalize(payload).user;
-        let id = Object.keys(user)[0];
-        return { ...state, current: id };
-      }
-      break;
+    case ACTIONS.ADD_USER: {
+      const user = normalize(payload).user;
+      return { ...state, ...user };
+    }
+    case ACTIONS.SET_CURRENT_USER: {
+      const user = normalize(payload).user;
+      let id = Object.keys(user)[0];
+      return { ...state, current: parseInt(id) };
+    }
     default:
       return state;
   }

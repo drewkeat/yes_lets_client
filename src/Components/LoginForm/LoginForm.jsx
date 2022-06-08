@@ -1,63 +1,66 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-class LoginForm extends Component {
-  state = {
+import { loginUser } from "../../Actions/userActions";
+
+const LoginForm = ({ loginUser, changeForm, ...props }) => {
+  const [state, setState] = useState({
     email: "",
     password: "",
+  });
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setState({ ...state, [e.target.name]: e.target.value });
   };
 
-  handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
-  // TODO: Alter to transmit form values to api
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    loginUser(state, navigate);
   };
 
-  render() {
-    return (
-      <div
-        className="form-container"
+  return (
+    <div
+      className="form-container"
+      style={{
+        display: "grid",
+        justifyContent: "center",
+        width: "100vw",
+        ...props.style,
+      }}
+    >
+      <form
         style={{
           display: "grid",
+          gridTemplateColumns: "repeat(2, 1fr)",
           justifyContent: "center",
-          width: "100vw",
-          ...this.props.style,
+          gap: ".25rem",
         }}
+        onSubmit={(e) => handleSubmit(e)}
       >
-        <form
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(2, 1fr)",
-            justifyContent: "center",
-            gap: ".25rem",
-          }}
-          onSubmit={(e) => this.handleSubmit(e)}
-        >
-          <input
-            name="email"
-            type="email"
-            placeholder="Email"
-            onChange={(e) => this.handleChange(e)}
-            value={this.state.email}
-            style={{ gridColumn: "1/span 2" }}
-          />
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            onChange={(e) => this.handleChange(e)}
-            value={this.state.password}
-            style={{ gridColumn: "1/span 2" }}
-          />
-          <button type="submit">Login</button>
-          <button onClick={() => this.props.changeForm(false)}>Signup</button>
-        </form>
-      </div>
-    );
-  }
-}
+        <input
+          name="email"
+          type="email"
+          placeholder="Email"
+          onChange={(e) => handleChange(e)}
+          value={state.email}
+          style={{ gridColumn: "1/span 2" }}
+        />
+        <input
+          name="password"
+          type="password"
+          placeholder="Password"
+          onChange={(e) => handleChange(e)}
+          value={state.password}
+          style={{ gridColumn: "1/span 2" }}
+        />
+        <button type="submit">Login</button>
+        <button onClick={() => changeForm(false)}>Signup</button>
+      </form>
+    </div>
+  );
+};
 
-export default LoginForm;
+export default connect(null, { loginUser })(LoginForm);

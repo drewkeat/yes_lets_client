@@ -4,7 +4,7 @@ import LoginForm from "../Components/LoginForm/LoginForm";
 import SignupForm from "../Components/SignupForm/SignupForm";
 // import { createUser } from "../Actions/userActions";
 
-export class Landing extends Component {
+class Landing extends Component {
   state = {
     displayLogin: true,
   };

@@ -1,0 +1,7 @@
+.react-calendar__navigation {
+  display: flex;
+}
+
+.react-calendar__tile--active {
+  background: lightblue;
+}

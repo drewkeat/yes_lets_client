@@ -1,19 +1,24 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-const LoginForm = ({ ...props }) => {
+import { loginUser } from "../../Actions/userActions";
+
+const LoginForm = ({ loginUser, changeForm, ...props }) => {
   const [state, setState] = useState({
     email: "",
     password: "",
   });
 
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
 
-  // TODO: Alter to transmit form values to api
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(state);
+    loginUser(state, navigate);
   };
 
   return (
@@ -52,10 +57,10 @@ const LoginForm = ({ ...props }) => {
           style={{ gridColumn: "1/span 2" }}
         />
         <button type="submit">Login</button>
-        <button onClick={() => props.changeForm(false)}>Signup</button>
+        <button onClick={() => changeForm(false)}>Signup</button>
       </form>
     </div>
   );
 };
 
-export default LoginForm;
+export default connect(null, { loginUser })(LoginForm);

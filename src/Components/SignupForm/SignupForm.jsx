@@ -19,7 +19,6 @@ const SignupForm = ({ changeForm, createUser, ...props }) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
 
-  // TODO: Alter to transmit form values to api
   const handleSubmit = (e) => {
     e.preventDefault();
     createUser(state, navigate);

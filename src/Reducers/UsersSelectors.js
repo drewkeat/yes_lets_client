@@ -27,6 +27,7 @@ export const selectFriends = createSelector(
     if (ids) {
       let friendArr = Object.keys(users).filter((key) => ids.includes(key));
       friendArr = friendArr.map((id) => users[id]);
+      return friendArr;
     }
     return null;
   }

@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Calendar from "react-calendar";
 
+import { getAvailabilitiesFromUser } from "../../Reducers/Availabilities/AvailabilitiesSelectors";
 import "./Calendar.css";
-export const SmallCalendar = ({ onChange, date, ...props }) => {
+
+const SmallCalendar = ({ changeDate, date, user, ...props }) => {
+  useEffect(() => {}, []);
+
   // TODO: Update to display availabilities and hangouts
-  const tileContent = ({ activeStartDate, date, view }) =>
+  const tileContent = ({ date, view }) =>
     view === "month" && date.getDay() === 0 ? <p>It's Sunday!</p> : null;
 
   return (
     <div style={{ width: "100%" }}>
       <Calendar
-        onChange={onChange}
+        onChange={changeDate}
         value={date}
         tileContent={tileContent}
         calendarType={"US"}
@@ -20,8 +24,10 @@ export const SmallCalendar = ({ onChange, date, ...props }) => {
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state, { user, ...props }) => {
+  return {
+    availabilites: getAvailabilitiesFromUser(state, user),
+  };
+};
 
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SmallCalendar);
+export default connect(mapStateToProps, null)(SmallCalendar);

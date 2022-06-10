@@ -8,6 +8,9 @@ const initialState = {
 
 const Users = (state = initialState, { type, payload }) => {
   switch (type) {
+    case ACTIONS.USER_LOADING: {
+      return { ...state, loading: !state.loading };
+    }
     case ACTIONS.ADD_USER: {
       const user = payload.user;
       return { ...state, ...user };

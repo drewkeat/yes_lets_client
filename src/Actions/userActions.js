@@ -11,6 +11,7 @@ const createUser = (userData, navigate) => {
     body: JSON.stringify({ user: userData }),
   };
   return (dispatch) => {
+    dispatch({ type: ACTIONS.USER_LOADING });
     callAPI({
       endpoint: "/users",
       options: options,
@@ -18,6 +19,7 @@ const createUser = (userData, navigate) => {
       .then((resp) => {
         dispatch({ type: ACTIONS.ADD_USER, payload: resp });
         dispatch({ type: ACTIONS.SET_CURRENT_USER, payload: resp });
+        dispatch({ type: ACTIONS.USER_LOADING });
       })
       .then(navigate("/dashboard"));
   };
@@ -25,9 +27,13 @@ const createUser = (userData, navigate) => {
 
 const fetchUser = (userId) => {
   return (dispatch) => {
+    dispatch({ type: ACTIONS.USER_LOADING });
     callAPI({
       endpoint: "/users/" + userId,
-    }).then((resp) => dispatch({ type: ACTIONS.ADD_USER, payload: resp }));
+    }).then((resp) => {
+      dispatch({ type: ACTIONS.ADD_USER, payload: resp });
+      dispatch({ type: ACTIONS.USER_LOADING });
+    });
   };
 };
 
@@ -40,6 +46,7 @@ const loginUser = (userInfo, navigate) => {
     body: JSON.stringify({ user: userInfo }),
   };
   return (dispatch) => {
+    dispatch({ type: ACTIONS.USER_LOADING });
     callAPI({
       endpoint: "/login",
       options: options,
@@ -47,6 +54,7 @@ const loginUser = (userInfo, navigate) => {
       .then((resp) => {
         dispatch({ type: ACTIONS.ADD_USER, payload: resp });
         dispatch({ type: ACTIONS.SET_CURRENT_USER, payload: resp });
+        dispatch({ type: ACTIONS.USER_LOADING });
       })
       .then(() => navigate("/dashboard"));
   };

@@ -1,3 +1,3 @@
-export const getAvailabilitiesFromIDs = (state, ids) => {
-  return ids.map((id) => state.availabilities[id]);
+export const getAvailabilitiesFromUser = (state, user) => {
+  return user.availabilities.map((id) => state.availabilities[id]);
 };

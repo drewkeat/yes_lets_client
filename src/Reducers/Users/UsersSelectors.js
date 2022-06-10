@@ -20,7 +20,6 @@ export const buildUser = (user) => {
       Object.assign(newUser, { [key]: [...newUser[key], entity.id] });
     });
   }
-  debugger;
   return newUser;
 };
 

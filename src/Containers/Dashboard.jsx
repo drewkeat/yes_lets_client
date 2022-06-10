@@ -29,9 +29,7 @@ class Dashboard extends Component {
           />
           <AvailabilitiesView
             selectedDate={this.state.selectedDate}
-            availabilityIDs={this.props.currentUser.availabilities.map(
-              (avail) => avail.id
-            )}
+            availabilityIDs={this.props.currentUser.availabilities}
           />
         </div>
       </div>

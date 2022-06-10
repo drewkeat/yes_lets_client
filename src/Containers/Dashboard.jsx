@@ -4,7 +4,7 @@ import AvailabilitiesView from "../Components/AvailabilitiesView/AvailabilitiesV
 
 import { SmallCalendar } from "../Components/SmallCalendar/SmallCalendar";
 // import { fetchUser } from "../Actions/userActions";
-import { selectCurrentUser } from "../Reducers/UsersSelectors";
+import { selectCurrentUser } from "../Reducers/Users/UsersSelectors";
 
 class Dashboard extends Component {
   state = {

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import { fetchAvailability } from "../../Actions/availabilityActions";
-import { getAvailabilitiesFromIDs } from "../../Reducers/AvailabilitiesSelectors";
+import { getAvailabilitiesFromIDs } from "../../Reducers/Availabilities/AvailabilitiesSelectors";
 
 export const AvailabilitiesView = ({
   availabilityIDs,
@@ -11,11 +11,12 @@ export const AvailabilitiesView = ({
   selectedDate,
   ...props
 }) => {
+  // QUESTION: useEffect is rendering too many times, but it is illegal to pass an empty dep array now?
   useEffect(() => {
     if (availabilityIDs) {
       availabilityIDs.forEach((id) => fetchAvailability(id));
     }
-  }, [fetchAvailability, availabilityIDs]);
+  }, []);
 
   const renderAvailabilities = () => {
     const sortedAvail = availabilities.sort((a, b) => {

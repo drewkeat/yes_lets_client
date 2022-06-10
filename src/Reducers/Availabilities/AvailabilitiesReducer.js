@@ -1,5 +1,5 @@
 import normalize from "json-api-normalizer";
-import ACTIONS from "../Actions/actionTypes";
+import ACTIONS from "../../Actions/actionTypes";
 const initialState = {};
 
 const Availabilities = (state = initialState, { type, payload }) => {

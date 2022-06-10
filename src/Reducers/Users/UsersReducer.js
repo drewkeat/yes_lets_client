@@ -1,4 +1,4 @@
-import ACTIONS from "../Actions/actionTypes";
+import ACTIONS from "../../Actions/actionTypes";
 import normalize from "json-api-normalizer";
 
 const initialState = {

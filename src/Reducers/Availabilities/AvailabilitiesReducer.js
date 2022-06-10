@@ -1,11 +1,12 @@
-import normalize from "json-api-normalizer";
 import ACTIONS from "../../Actions/actionTypes";
-const initialState = {};
+const initialState = {
+  loading: false,
+};
 
 const Availabilities = (state = initialState, { type, payload }) => {
   switch (type) {
     case ACTIONS.ADD_AVAILABILITY: {
-      const availability = normalize(payload).availability;
+      const availability = payload.availability;
       return { ...state, ...availability };
     }
     default:

@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import Calendar from "react-calendar";
 
 import "./Calendar.css";
-export const SmallCalendar = (props) => {
-  const [value, onChange] = useState(new Date());
-
+export const SmallCalendar = ({ onChange, date, ...props }) => {
   // TODO: Update to display availabilities and hangouts
   const tileContent = ({ activeStartDate, date, view }) =>
     view === "month" && date.getDay() === 0 ? <p>It's Sunday!</p> : null;
@@ -14,7 +12,7 @@ export const SmallCalendar = (props) => {
     <div style={{ width: "100%" }}>
       <Calendar
         onChange={onChange}
-        value={value}
+        value={date}
         tileContent={tileContent}
         calendarType={"US"}
       />

@@ -5,3 +5,7 @@
 .react-calendar__tile--active {
   background: lightblue;
 }
+
+.has-details {
+  background: lightseagreen;
+}

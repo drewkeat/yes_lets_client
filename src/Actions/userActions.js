@@ -1,29 +1,39 @@
 import ACTIONS from "./actionTypes";
 import { API_URL } from "../Utils/constants";
+import { callAPI } from "../Utils/callAPI";
 
 const createUser = (userData, navigate) => {
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ user: userData }),
+  };
   return (dispatch) => {
-    fetch(API_URL + "/users", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ user: userData }),
+    dispatch({ type: ACTIONS.USER_LOADING });
+    callAPI({
+      endpoint: "/users",
+      options: options,
     })
-      .then((resp) => resp.json())
-      .then((json) => {
-        dispatch({ type: ACTIONS.ADD_USER, payload: json });
-        dispatch({ type: ACTIONS.SET_CURRENT_USER, payload: json });
-        navigate("/dashboard");
-      });
+      .then((resp) => {
+        dispatch({ type: ACTIONS.ADD_USER, payload: resp });
+        dispatch({ type: ACTIONS.SET_CURRENT_USER, payload: resp });
+        dispatch({ type: ACTIONS.USER_LOADING });
+      })
+      .then(navigate("/dashboard"));
   };
 };
 
-const fetchUser = (userID) => {
+const fetchUser = (userId) => {
   return (dispatch) => {
-    fetch(API_URL + "/users/" + userID)
-      .then((resp) => resp.json())
-      .then((json) => {
-        dispatch({ type: ACTIONS.ADD_USER, payload: json });
-      });
+    dispatch({ type: ACTIONS.USER_LOADING });
+    callAPI({
+      endpoint: "/users/" + userId,
+    }).then((resp) => {
+      dispatch({ type: ACTIONS.ADD_USER, payload: resp });
+      dispatch({ type: ACTIONS.USER_LOADING });
+    });
   };
 };
 
@@ -36,14 +46,17 @@ const loginUser = (userInfo, navigate) => {
     body: JSON.stringify({ user: userInfo }),
   };
   return (dispatch) => {
-    fetch(API_URL + "/login", options)
-      //TODO: Implement error handling
-      .then((resp) => resp.json())
-      .then((json) => {
-        dispatch({ type: ACTIONS.ADD_USER, payload: json });
-        dispatch({ type: ACTIONS.SET_CURRENT_USER, payload: json });
-        navigate("/dashboard");
-      });
+    dispatch({ type: ACTIONS.USER_LOADING });
+    callAPI({
+      endpoint: "/login",
+      options: options,
+    })
+      .then((resp) => {
+        dispatch({ type: ACTIONS.ADD_USER, payload: resp });
+        dispatch({ type: ACTIONS.SET_CURRENT_USER, payload: resp });
+        dispatch({ type: ACTIONS.USER_LOADING });
+      })
+      .then(() => navigate("/dashboard"));
   };
 };
 

@@ -1,5 +1,7 @@
 // import ACTIONS from "../Actions/actionTypes";
-const initialState = {};
+const initialState = {
+  loading: false,
+};
 
 const Friendships = (state = initialState, { type, payload }) => {
   switch (type) {

@@ -1,7 +1,7 @@
-import availabilities from "./AvailabilitiesReducer";
-import friendships from "./FriendshipsReducer";
-import hangtimes from "./HangtimesReducer";
-import users from "./UsersReducer";
+import availabilities from "./Availabilities/AvailabilitiesReducer";
+import friendships from "./Friendships/FriendshipsReducer";
+import hangtimes from "./Hangtimes/HangtimesReducer";
+import users from "./Users/UsersReducer";
 import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({

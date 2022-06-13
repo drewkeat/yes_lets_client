@@ -1,13 +1,15 @@
 import ACTIONS from "./actionTypes";
-import { API_URL } from "../Utils/constants";
+import { callAPI } from "../Utils/callAPI";
 
 const fetchAvailability = (availabilityID) => {
   return (dispatch) => {
-    fetch(API_URL + "/availabilities/" + availabilityID)
-      .then((resp) => resp.json())
-      .then((json) => {
-        dispatch({ type: ACTIONS.ADD_AVAILABILITY, payload: json });
-      });
+    dispatch({ type: ACTIONS.AVAILABILITY_LOADING });
+    callAPI({
+      endpoint: "/availabilities/" + availabilityID,
+    }).then((resp) => {
+      dispatch({ type: ACTIONS.ADD_AVAILABILITY, payload: resp });
+      dispatch({ type: ACTIONS.AVAILABILITY_LOADING });
+    });
   };
 };
 

@@ -1,8 +1,8 @@
 import normalize from "json-api-normalizer";
 
 export const callAPI = ({ endpoint, options }) => {
-  const API_ROOT = "http://localhost:3001";
-  // const API_ROOT = "https://yes-lets-api.herokuapp.com"
+  // const API_ROOT = "http://localhost:3001";
+  const API_ROOT = "https://yes-lets-api.herokuapp.com";
 
   const callAPI = (endpoint, options = {}) => {
     const fullUrl =

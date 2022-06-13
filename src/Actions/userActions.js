@@ -1,5 +1,4 @@
 import ACTIONS from "./actionTypes";
-import { API_URL } from "../Utils/constants";
 import { callAPI } from "../Utils/callAPI";
 
 const createUser = (userData, navigate) => {

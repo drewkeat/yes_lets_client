@@ -1,3 +1,6 @@
 export const getAvailabilitiesFromUser = (state, user) => {
-  return user.availabilities.map((id) => state.availabilities[id]);
+  const availabilitiesMap = user.availabilities.map(
+    (id) => state.availabilities[id] || null
+  );
+  return availabilitiesMap.filter((i) => i !== null);
 };

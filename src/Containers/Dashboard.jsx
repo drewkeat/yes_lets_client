@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import SmallCalendar from "../Components/SmallCalendar/SmallCalendar";
 import { fetchAvailability } from "../Actions/availabilityActions";
+import { fetchUser } from "../Actions/userActions";
 import { selectCurrentUser } from "../Reducers/Users/UsersSelectors";
 
 class Dashboard extends Component {
@@ -12,9 +13,14 @@ class Dashboard extends Component {
   };
 
   componentDidMount() {
-    this.props.currentUser.availabilities.forEach((id) =>
-      this.props.fetchAvailability(id)
-    );
+    const user = this.props.currentUser;
+    const userRels = [
+      ...user.friends,
+      ...user.pendingFriends,
+      ...user.friendInvites,
+    ];
+    userRels.forEach((id) => this.props.fetchUser(id));
+    user.availabilities.forEach((id) => this.props.fetchAvailability(id));
   }
 
   changeDate = (date) => {
@@ -22,9 +28,6 @@ class Dashboard extends Component {
   };
 
   render() {
-    if (this.props.loading) {
-      return <h1>Loading</h1>;
-    }
     return (
       <div>
         <h1 style={{ textAlign: "center" }}>
@@ -51,4 +54,6 @@ const mapStateToProps = (state) => {
     currentUser: selectCurrentUser(state),
   };
 };
-export default connect(mapStateToProps, { fetchAvailability })(Dashboard);
+export default connect(mapStateToProps, { fetchAvailability, fetchUser })(
+  Dashboard
+);

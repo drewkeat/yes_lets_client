@@ -25,11 +25,15 @@ const SmallCalendar = ({
 
   const tileClassName = ({ date, view }) => {
     if (view === "month") {
-      if (datesToCheck.find((cDate) => cDate.getDate() === date.getDate())) {
+      if (
+        // datesToCheck &&
+        datesToCheck.find((cDate) => cDate.getDate() === date.getDate())
+      ) {
         return "has-details";
       }
     }
   };
+
   return (
     <div style={{ width: "100%" }}>
       <Calendar

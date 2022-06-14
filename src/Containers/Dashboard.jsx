@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import SmallCalendar from "../Components/SmallCalendar/SmallCalendar";
 import DailyDetails from "../Components/DailyDetails/DailyDetails";
+import Navbar from "../Components/Navbar/Navbar";
 import { fetchAvailability } from "../Actions/availabilityActions";
 import { fetchHangtime } from "../Actions/hangtimeActions";
 import { fetchUser } from "../Actions/userActions";
@@ -32,6 +33,7 @@ class Dashboard extends Component {
   render() {
     return (
       <div>
+        <Navbar />
         <h1 style={{ textAlign: "center" }}>
           Welcome {this.props.currentUser.fullName}
         </h1>

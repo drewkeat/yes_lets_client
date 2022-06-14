@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import Calendar from "react-calendar";
 
@@ -18,16 +18,22 @@ const SmallCalendar = ({
   const datesToCheck = availabilities.map((a) => new Date(a.attributes.start));
 
   const tileContent = ({ date, view }) => {
-    if (view === "month" && date.getDay() === 0) {
-      return <p>It's Sunday</p>;
+    if (
+      view === "month" &&
+      datesToCheck.find(
+        (cDate) => cDate.toLocaleDateString() === date.toLocaleDateString()
+      )
+    ) {
+      return <div>details</div>;
     }
   };
 
   const tileClassName = ({ date, view }) => {
     if (view === "month") {
       if (
-        // datesToCheck &&
-        datesToCheck.find((cDate) => cDate.getDate() === date.getDate())
+        datesToCheck.find(
+          (cDate) => cDate.toLocaleDateString() === date.toLocaleDateString()
+        )
       ) {
         return "has-details";
       }

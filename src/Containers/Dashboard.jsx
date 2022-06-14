@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import AvailabilitiesView from "../Components/AvailabilitiesView/AvailabilitiesView";
 
 import SmallCalendar from "../Components/SmallCalendar/SmallCalendar";
+import DailyDetails from "../Components/DailyDetails/DailyDetails";
 import { fetchAvailability } from "../Actions/availabilityActions";
+import { fetchHangtime } from "../Actions/hangtimeActions";
 import { fetchUser } from "../Actions/userActions";
 import { selectCurrentUser } from "../Reducers/Users/UsersSelectors";
 
@@ -21,6 +22,7 @@ class Dashboard extends Component {
     ];
     userRels.forEach((id) => this.props.fetchUser(id));
     user.availabilities.forEach((id) => this.props.fetchAvailability(id));
+    user.hangtimes.forEach((id) => this.props.fetchHangtime(id));
   }
 
   changeDate = (date) => {
@@ -39,10 +41,10 @@ class Dashboard extends Component {
             changeDate={this.changeDate}
             user={this.props.currentUser}
           />
-          {/* <AvailabilitiesView
-            selectedDate={this.state.selectedDate}
-            availabilityIDs={this.props.currentUser.availabilities}
-          /> */}
+          <DailyDetails
+            date={this.state.selectedDate || new Date()}
+            user={this.props.currentUser}
+          />
         </div>
       </div>
     );
@@ -54,6 +56,8 @@ const mapStateToProps = (state) => {
     currentUser: selectCurrentUser(state),
   };
 };
-export default connect(mapStateToProps, { fetchAvailability, fetchUser })(
-  Dashboard
-);
+export default connect(mapStateToProps, {
+  fetchAvailability,
+  fetchHangtime,
+  fetchUser,
+})(Dashboard);

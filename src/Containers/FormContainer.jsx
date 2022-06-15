@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Navbar from "../Components/Navbar/Navbar";
+import { Navbar } from "../Components";
 
 class FormContainer extends Component {
   render() {

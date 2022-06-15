@@ -1,12 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import SmallCalendar from "../Components/SmallCalendar/SmallCalendar";
-import DailyDetails from "../Components/DailyDetails/DailyDetails";
-import Navbar from "../Components/Navbar/Navbar";
-import { fetchAvailability } from "../Actions/availabilityActions";
-import { fetchHangtime } from "../Actions/hangtimeActions";
-import { fetchUser } from "../Actions/userActions";
+import { Navbar, SmallCalendar, DailyDetails } from "../Components";
+import { fetchUser, fetchAvailability, fetchHangtime } from "../Actions";
 import { selectCurrentUser } from "../Reducers/Users/UsersSelectors";
 
 class Dashboard extends Component {
@@ -31,21 +27,26 @@ class Dashboard extends Component {
   };
 
   render() {
+    const {
+      fetchUser,
+      fetchAvailability,
+      fetchHangtime,
+      currentUser,
+      loading,
+    } = this.props;
     return (
       <div>
         <Navbar />
-        <h1 style={{ textAlign: "center" }}>
-          Welcome {this.props.currentUser.fullName}
-        </h1>
+        <h1 style={{ textAlign: "center" }}>Welcome {currentUser.fullName}</h1>
         <div style={{ width: "80%", margin: "auto" }}>
           <SmallCalendar
             date={this.state.selectedDate}
             changeDate={this.changeDate}
-            user={this.props.currentUser}
+            user={currentUser}
           />
           <DailyDetails
             date={this.state.selectedDate || new Date()}
-            user={this.props.currentUser}
+            user={currentUser}
           />
         </div>
       </div>

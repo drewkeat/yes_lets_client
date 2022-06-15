@@ -1,8 +1,11 @@
 import { Routes, Route } from "react-router-dom";
-import { Landing, Dashboard } from "../Containers";
-import Account from "../Containers/Account";
-import FormContainer from "../Containers/FormContainer";
-import FriendsNav from "../Containers/FriendsNav";
+import {
+  Landing,
+  Dashboard,
+  Account,
+  FormContainer,
+  FriendsNav,
+} from "../Containers";
 function RoutesConfig() {
   return (
     <Routes>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { Navbar, SmallCalendar, DailyDetails } from "../Components";
-import { fetchUser, fetchAvailability, fetchHangtime } from "../Actions";
+import { fetchEntity } from "../Actions";
 import { selectCurrentUser } from "../Reducers/Users/UsersSelectors";
 
 class Dashboard extends Component {
@@ -13,13 +13,16 @@ class Dashboard extends Component {
   componentDidMount() {
     const user = this.props.currentUser;
     const userRels = [
+      //QUESTION: Why does my app get hung up on account creation if mapStateToProps is called by the connect HOC?  Error states that friends = null
       ...user.friends,
       ...user.pendingFriends,
       ...user.friendInvites,
     ];
-    userRels.forEach((id) => this.props.fetchUser(id));
-    user.availabilities.forEach((id) => this.props.fetchAvailability(id));
-    user.hangtimes.forEach((id) => this.props.fetchHangtime(id));
+    userRels.forEach((id) => this.props.fetchEntity(id, "user"));
+    user.availabilities.forEach((id) =>
+      this.props.fetchEntity(id, "availability")
+    );
+    user.hangtimes.forEach((id) => this.props.fetchEntity(id, "hangtime"));
   }
 
   changeDate = (date) => {
@@ -27,13 +30,10 @@ class Dashboard extends Component {
   };
 
   render() {
-    const {
-      fetchUser,
-      fetchAvailability,
-      fetchHangtime,
-      currentUser,
-      loading,
-    } = this.props;
+    const { currentUser, loading } = this.props;
+    if (loading) {
+      return <div> Loading </div>;
+    }
     return (
       <div>
         <Navbar />
@@ -60,7 +60,5 @@ const mapStateToProps = (state) => {
   };
 };
 export default connect(mapStateToProps, {
-  fetchAvailability,
-  fetchHangtime,
-  fetchUser,
+  fetchEntity,
 })(Dashboard);

@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-// import { connect } from "react-redux";
-import LoginForm from "../Components/LoginForm/LoginForm";
-import SignupForm from "../Components/SignupForm/SignupForm";
-// import { createUser } from "../Actions/userActions";
+import { LoginForm, SignupForm } from "../Components";
 
 class Landing extends Component {
   state = {
@@ -25,7 +22,6 @@ class Landing extends Component {
           <SignupForm
             changeForm={this.changeForm}
             style={{ marginTop: "3rem" }}
-            // createUser={this.props.createUser}
           />
         )}
       </div>
@@ -33,5 +29,4 @@ class Landing extends Component {
   }
 }
 
-// export default connect(null, { createUser })(Landing);
 export default Landing;

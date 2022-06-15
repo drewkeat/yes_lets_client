@@ -3,13 +3,7 @@ import { connect } from "react-redux";
 import { getAvailabilitiesFromUser } from "../../Reducers/Availabilities/AvailabilitiesSelectors";
 import { getHangtimesFromUser } from "../../Reducers/Hangtimes/HangtimesSelectors";
 
-export const DailyDetails = ({
-  user,
-  date,
-  availabilities,
-  hangtimes,
-  ...props
-}) => {
+const DailyDetails = ({ user, date, availabilities, hangtimes, ...props }) => {
   const renderAvailabilities = () => {
     if (availabilities) {
       let availList = availabilities.filter(

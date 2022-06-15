@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createUser } from "../../Actions/userActions";
+import { createEntity } from "../../Actions";
 
-const SignupForm = ({ changeForm, createUser, ...props }) => {
+const SignupForm = ({ changeForm, createEntity, ...props }) => {
   const [state, setState] = useState({
     first: "",
     last: "",
@@ -21,7 +21,7 @@ const SignupForm = ({ changeForm, createUser, ...props }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createUser(state, navigate);
+    createEntity(state, "user", navigate, "/dashboard");
   };
 
   return (
@@ -92,4 +92,4 @@ const SignupForm = ({ changeForm, createUser, ...props }) => {
   );
 };
 
-export default connect(null, { createUser })(SignupForm);
+export default connect(null, { createEntity })(SignupForm);

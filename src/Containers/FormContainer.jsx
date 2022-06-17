@@ -1,31 +1,37 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import { Navigate } from "react-router-dom";
+import moment from "moment";
+
+import { Navigate } from "react-router-dom";
 import { Navbar } from "../Components";
 import { createEntity } from "../Actions";
 import "../index.css";
+import { selectCurrentUser } from "../Reducers/Users/UsersSelectors";
 
 class FormContainer extends Component {
   state = {
-    start: undefined,
-    end: undefined,
+    start: moment(),
+    end: moment(),
+    user_id: this.props.currentUser.id,
+    submitted: false,
   };
 
   handleChange = (e) => {
-    this.setState({ ...this.state, [e.target.name]: e.target.value });
+    const newDate = new Date(e.target.value);
+    this.setState({ ...this.state, [e.target.name]: newDate });
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    alert("Install Datetime Picker");
-    console.log(this.state);
-    // this.props.createEntity(this.state, "availability", Navigate, "/dashboard");
+    this.props.createEntity(this.state, "availability");
+    this.setState({ ...this.state, submitted: !this.state.submitted });
   };
 
   render() {
-    const { start, end } = this.state;
+    const { start, end, submitted } = this.state;
     return (
       <div>
+        {submitted && <Navigate to={"/dashboard"} replace={true} />}
         <Navbar />
         <div className="form-container">
           <form onSubmit={this.handleSubmit}>
@@ -38,7 +44,7 @@ class FormContainer extends Component {
                 name="start"
                 id="startTime"
                 onChange={this.handleChange}
-                value={start}
+                value={moment(start).format("YYYY-MM-DDTHH:mm")}
               />
             </div>
             <div className="form-control">
@@ -49,7 +55,7 @@ class FormContainer extends Component {
                 name="end"
                 id="endTime"
                 onChange={this.handleChange}
-                value={end}
+                value={moment(end).format("YYYY-MM-DDTHH:mm")}
               />
             </div>
             <div className="form-control">
@@ -70,6 +76,8 @@ class FormContainer extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  currentUser: selectCurrentUser(state),
+});
 
 export default connect(mapStateToProps, { createEntity })(FormContainer);

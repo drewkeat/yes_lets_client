@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createEntity } from "../../Actions";
+import { createEntity, updateEntity } from "../../Actions";
 
-const SignupForm = ({ changeForm, createEntity, ...props }) => {
+const SignupForm = ({
+  changeForm,
+  createEntity,
+  user,
+  updateEntity,
+  ...props
+}) => {
   const [state, setState] = useState({
     first: "",
     last: "",
@@ -13,6 +19,23 @@ const SignupForm = ({ changeForm, createEntity, ...props }) => {
     password_confirmation: "",
   });
 
+  useEffect(() => {
+    if (user) {
+      const [firstName, lastName] = user.fullName.split(" ");
+      const { email, phoneNumber, id } = { ...user };
+      debugger;
+      setState({
+        ...state,
+        first: firstName,
+        last: lastName,
+        email: email,
+        phone_number: phoneNumber || "",
+        user_id: id,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -21,7 +44,9 @@ const SignupForm = ({ changeForm, createEntity, ...props }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createEntity(state, "user", navigate, "/dashboard");
+    user
+      ? updateEntity(state, "user", navigate, "/dashboard")
+      : createEntity(state, "user", navigate, "/dashboard");
   };
 
   return (
@@ -85,11 +110,20 @@ const SignupForm = ({ changeForm, createEntity, ...props }) => {
           onChange={(e) => handleChange(e)}
           value={state.password_confirmation}
         />
-        <button type="submit">Join</button>
-        <button onClick={() => changeForm(true)}>Back to Login</button>
+        {!user && (
+          <>
+            <button type="submit">Join</button>
+            <button onClick={() => changeForm(true)}>Back to Login</button>
+          </>
+        )}
+        {user && (
+          <button style={{ gridColumn: "1/ span 2" }} type="submit">
+            Update Profile
+          </button>
+        )}
       </form>
     </div>
   );
 };
 
-export default connect(null, { createEntity })(SignupForm);
+export default connect(null, { createEntity, updateEntity })(SignupForm);

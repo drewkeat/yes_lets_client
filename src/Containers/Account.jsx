@@ -1,19 +1,28 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Navbar } from "../Components";
+import { Navbar, SignupForm } from "../Components";
+import { selectCurrentUser } from "../Reducers/Users/UsersSelectors";
 
 class Account extends Component {
+  state = {};
   render() {
+    const { user } = this.props;
+    const [firstName] = user.fullName.split(" ");
     return (
       <div>
         <Navbar />
-        <h1 style={{ textAlign: "center" }}>Account</h1>
+        <h1 style={{ textAlign: "center" }}>{firstName}'s Account</h1>
+        <div>
+          <SignupForm user={user} />
+        </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  user: selectCurrentUser(state),
+});
 
 const mapDispatchToProps = {};
 

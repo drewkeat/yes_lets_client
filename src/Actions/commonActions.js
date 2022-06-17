@@ -1,7 +1,7 @@
 // import ACTIONS from "./actionTypes";
 import { callAPI } from "../Utils/callAPI";
 import pluralize from "pluralize";
-import _ from "lodash";
+// import _ from "lodash";
 
 const fetchEntity = (id, type) => {
   const endpoint = `/${pluralize(type)}/${id}`;

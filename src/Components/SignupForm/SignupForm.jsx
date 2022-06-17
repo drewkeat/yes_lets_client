@@ -110,8 +110,11 @@ const SignupForm = ({
           onChange={(e) => handleChange(e)}
           value={state.password_confirmation}
         />
-        {!user && <button type="submit">Join</button> && (
-          <button onClick={() => changeForm(true)}>Back to Login</button>
+        {!user && (
+          <>
+            <button type="submit">Join</button>
+            <button onClick={() => changeForm(true)}>Back to Login</button>
+          </>
         )}
         {user && (
           <button style={{ gridColumn: "1/ span 2" }} type="submit">

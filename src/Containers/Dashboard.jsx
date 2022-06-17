@@ -18,6 +18,7 @@ class Dashboard extends Component {
       ...user.pendingFriends,
       ...user.friendInvites,
     ];
+    this.props.fetchEntity(user.id, "user");
     userRels.forEach((id) => this.props.fetchEntity(id, "user"));
     user.availabilities.forEach((id) =>
       this.props.fetchEntity(id, "availability")

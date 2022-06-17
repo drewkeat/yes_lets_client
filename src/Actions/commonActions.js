@@ -44,4 +44,28 @@ const createEntity = (entityData, type, navigate, finalEndpoint) => {
   };
 };
 
-export { fetchEntity, createEntity };
+const updateEntity = (entityData, type, navigate, finalEndpoint) => {
+  const endpoint = `/${pluralize(type)}/${entityData.user_id}`;
+  const typeUpper = type.toUpperCase();
+  const options = {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ [type]: entityData }),
+  };
+  return (dispatch) => {
+    dispatch({ type: `${typeUpper}_LOADING` });
+    callAPI({
+      endpoint: endpoint,
+      options: options,
+    }).then((resp) => {
+      debugger;
+      dispatch({ type: `UPDATE_${typeUpper}`, payload: resp });
+      dispatch({ type: `${typeUpper}_LOADING` });
+      navigate && navigate(finalEndpoint);
+    });
+  };
+};
+
+export { fetchEntity, createEntity, updateEntity };

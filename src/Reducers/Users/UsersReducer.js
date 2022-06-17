@@ -17,7 +17,13 @@ const Users = (state = initialState, { type, payload }) => {
     }
     case ACTIONS.SET_CURRENT_USER: {
       const user = payload.user;
-      let id = Object.keys(user)[0];
+      const id = Object.keys(user)[0];
+      return { ...state, current: parseInt(id) };
+    }
+    case ACTIONS.UPDATE_USER: {
+      debugger;
+      const user = payload.user;
+      const id = Object.keys(user)[0];
       return { ...state, current: parseInt(id) };
     }
     default:

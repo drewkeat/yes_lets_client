@@ -117,9 +117,11 @@ const SignupForm = ({
           </>
         )}
         {user && (
-          <button style={{ gridColumn: "1/ span 2" }} type="submit">
-            Update Profile
-          </button>
+          <>
+            <button type="submit">Update Profile</button>
+            {/* TODO: Create delete profile action */}
+            <button type="button">Delete Profile</button>
+          </>
         )}
       </form>
     </div>

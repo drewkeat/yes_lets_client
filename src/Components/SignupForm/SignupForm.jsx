@@ -55,7 +55,7 @@ const SignupForm = ({
       style={{
         display: "grid",
         justifyContent: "center",
-        width: "100vw",
+        width: "100%",
         ...props.style,
       }}
     >

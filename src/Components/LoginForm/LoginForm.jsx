@@ -27,7 +27,7 @@ const LoginForm = ({ loginUser, changeForm, ...props }) => {
       style={{
         display: "grid",
         justifyContent: "center",
-        width: "100vw",
+        width: "100%",
         ...props.style,
       }}
     >

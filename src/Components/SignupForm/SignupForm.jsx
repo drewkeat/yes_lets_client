@@ -23,7 +23,6 @@ const SignupForm = ({
     if (user) {
       const [firstName, lastName] = user.fullName.split(" ");
       const { email, phoneNumber, id } = { ...user };
-      debugger;
       setState({
         ...state,
         first: firstName,

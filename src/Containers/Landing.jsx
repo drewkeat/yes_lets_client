@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, Typography } from "@mui/material";
+import { Grid, Paper, Typography } from "@mui/material";
 import { LoginForm, SignupForm } from "../Components";
 
 class Landing extends Component {
@@ -36,22 +36,30 @@ class Landing extends Component {
           md={6}
           height={"100%"}
           alignContent={"center"}
+          alignItems={"center"}
           justifyContent={"center"}
           minHeight={"fit-content"}
+          direction="column"
           sx={{ minWidth: { xs: "100%", sm: "" } }}
         >
-          <Typography variant="h1">Yes, Let's!</Typography>
-          {this.state.displayLogin ? (
-            <LoginForm
-              changeForm={this.changeForm}
-              style={{ paddingTop: "3rem" }}
-            />
-          ) : (
-            <SignupForm
-              changeForm={this.changeForm}
-              style={{ paddingTop: "3rem" }}
-            />
-          )}
+          <Paper elevation={3} sx={{ padding: "1rem" }}>
+            <Typography variant="h1">Yes, Let's!</Typography>
+            {this.state.displayLogin ? (
+              <Grid
+                item
+                component={LoginForm}
+                changeForm={this.changeForm}
+                style={{ paddingTop: "3rem" }}
+              />
+            ) : (
+              <Grid
+                item
+                component={SignupForm}
+                changeForm={this.changeForm}
+                style={{ paddingTop: "3rem" }}
+              />
+            )}
+          </Paper>
         </Grid>
       </Grid>
     );

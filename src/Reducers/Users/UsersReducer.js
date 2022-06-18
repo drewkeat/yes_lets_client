@@ -21,7 +21,6 @@ const Users = (state = initialState, { type, payload }) => {
       return { ...state, current: parseInt(id) };
     }
     case ACTIONS.UPDATE_USER: {
-      debugger;
       const user = payload.user;
       const id = Object.keys(user)[0];
       return { ...state, current: parseInt(id) };

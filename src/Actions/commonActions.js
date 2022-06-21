@@ -60,7 +60,6 @@ const updateEntity = (entityData, type, navigate, finalEndpoint) => {
       endpoint: endpoint,
       options: options,
     }).then((resp) => {
-      debugger;
       dispatch({ type: `UPDATE_${typeUpper}`, payload: resp });
       dispatch({ type: `${typeUpper}_LOADING` });
       navigate && navigate(finalEndpoint);

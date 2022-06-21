@@ -40,26 +40,26 @@ class Landing extends Component {
           justifyContent={"center"}
           minHeight={"fit-content"}
           direction="column"
+          component={Paper}
+          elevation={10}
           sx={{ minWidth: { xs: "100%", sm: "" } }}
         >
-          <Paper elevation={3} sx={{ padding: "1rem" }}>
-            <Typography variant="h1">Yes, Let's!</Typography>
-            {this.state.displayLogin ? (
-              <Grid
-                item
-                component={LoginForm}
-                changeForm={this.changeForm}
-                style={{ paddingTop: "3rem" }}
-              />
-            ) : (
-              <Grid
-                item
-                component={SignupForm}
-                changeForm={this.changeForm}
-                style={{ paddingTop: "3rem" }}
-              />
-            )}
-          </Paper>
+          <Typography variant="h3">Yes, Let's!</Typography>
+          {this.state.displayLogin ? (
+            <Grid
+              item
+              component={LoginForm}
+              changeForm={this.changeForm}
+              style={{ paddingTop: "3rem" }}
+            />
+          ) : (
+            <Grid
+              item
+              component={SignupForm}
+              changeForm={this.changeForm}
+              style={{ paddingTop: "3rem" }}
+            />
+          )}
         </Grid>
       </Grid>
     );

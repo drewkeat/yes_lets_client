@@ -3,7 +3,7 @@ import { createSelector } from "reselect";
 
 export const selectUsers = (state) => {
   let slice = state.users;
-  let usersArr = _.filter(slice, (k) => k.id && k.id != state.users.current);
+  let usersArr = _.filter(slice, (k) => k.id && k.id !== state.users.current);
   return usersArr;
 };
 export const selectUserByID = (state, id) => state.users[id];

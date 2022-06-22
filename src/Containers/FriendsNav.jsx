@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Navbar } from "../Components";
+import { Navbar, UserSearch, UserCard } from "../Components";
 import {
   selectCurrentFriendIDs,
   selectCurrentUser,
@@ -46,6 +46,10 @@ class FriendsNav extends Component {
       <div>
         <Navbar />
         <h1 style={{ textAlign: "center" }}>FriendsNav</h1>
+        <div>
+          <UserSearch />
+          <UserCard />
+        </div>
         <div>{this.renderFriends()}</div>
         <label htmlFor="searchField">Search:</label>
         <input type="search" name="searchField" onChange={this.handleChange} />

@@ -2,10 +2,10 @@
   display: flex;
 }
 
-.react-calendar__tile--active {
-  background: lightblue;
+.has-details {
+  background: #20b1a9;
 }
 
-.has-details {
-  background: lightseagreen;
+.react-calendar__tile--active {
+  background: #8c9eff;
 }

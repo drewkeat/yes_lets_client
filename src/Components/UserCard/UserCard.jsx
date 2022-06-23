@@ -13,7 +13,7 @@ export const UserCard = ({ id, user, ...props }) => {
       elevation={2}
       {...props}
       justifyContent={"center"}
-      sx={{ width: "fit-content" }}
+      sx={{ minWidth: "fit-content" }}
     >
       <Grid item xs={12}>
         <Typography variant={"h6"} textAlign={"center"}>

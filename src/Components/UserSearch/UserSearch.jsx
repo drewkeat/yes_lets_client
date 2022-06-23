@@ -11,6 +11,7 @@ export const UserSearch = ({ query, handleChange, ...props }) => {
     <div>
       <form onSubmit={handleSubmit}>
         <TextField
+          size="small"
           type="search"
           name="searchField"
           placeholder={"Search"}

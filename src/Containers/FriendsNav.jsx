@@ -43,46 +43,47 @@ class FriendsNav extends Component {
 
   render() {
     return (
-      <Container>
-        <Grid container>
-          <Grid item xs={12}>
-            <Navbar />
-          </Grid>
-          <Grid item container xs={12} justifyContent={"start"}>
-            <UserSearch
-              query={this.state.query}
-              handleChange={this.handleChange}
-            />
-          </Grid>
-          {/* UserCardContainer */}
-          <Grid
-            container
-            justifyContent={"space-around"}
-            columns={4}
-            sx={{ gap: 1 }}
-          >
+      <>
+        <Navbar />
+        <Container>
+          <Grid container>
+            <Grid item xs={12}></Grid>
+            <Grid item container xs={12} justifyContent={"start"}>
+              <UserSearch
+                query={this.state.query}
+                handleChange={this.handleChange}
+              />
+            </Grid>
+            {/* UserCardContainer */}
             <Grid
-              item
-              component={Typography}
-              variant={"h3"}
-              gutterBottom
-              textAlign="center"
-              xs={4}
+              container
+              justifyContent={"space-around"}
+              columns={4}
+              sx={{ gap: 1 }}
             >
-              Friends
+              <Grid
+                item
+                component={Typography}
+                variant={"h3"}
+                gutterBottom
+                textAlign="center"
+                xs={4}
+              >
+                Friends
+              </Grid>
+              {this.renderFriends()}
             </Grid>
-            {this.renderFriends()}
+            <Grid item container mt={10}>
+              <Grid item xs={12}>
+                <Typography variant={"h5"}>User List</Typography>
+              </Grid>
+              <Grid item component={List}>
+                {this.renderUsers()}
+              </Grid>
+            </Grid>
           </Grid>
-          <Grid item container mt={10}>
-            <Grid item xs={12}>
-              <Typography variant={"h5"}>User List</Typography>
-            </Grid>
-            <Grid item component={List}>
-              {this.renderUsers()}
-            </Grid>
-          </Grid>
-        </Grid>
-      </Container>
+        </Container>
+      </>
     );
   }
 }

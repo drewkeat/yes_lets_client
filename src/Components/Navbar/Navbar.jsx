@@ -54,7 +54,7 @@ export const Navbar = (props) => {
   };
 
   return (
-    <AppBar position="static" sx={{ mb: 2 }}>
+    <AppBar position="static" color="secondary" sx={{ mb: 2 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Grid, Paper, Typography } from "@mui/material";
 import { LoginForm, SignupForm } from "../Components";
+import { EventAvailable } from "@mui/icons-material";
 
 class Landing extends Component {
   state = {
@@ -42,21 +43,29 @@ class Landing extends Component {
           direction="column"
           sx={{ minWidth: { xs: "100%", sm: "" } }}
         >
-          <Paper elevation={3} sx={{ padding: "1rem" }}>
+          <Paper elevation={3} sx={{ padding: "1rem", textAlign: "center" }}>
+            <EventAvailable
+              fontSize="large"
+              sx={{
+                transform: "scale(2)",
+                color: "#8c9eff",
+                my: 2,
+              }}
+            />
             <Typography variant="h1">Yes, Let's!</Typography>
             {this.state.displayLogin ? (
               <Grid
                 item
                 component={LoginForm}
                 changeForm={this.changeForm}
-                style={{ paddingTop: "3rem" }}
+                style={{ paddingTop: "1rem" }}
               />
             ) : (
               <Grid
                 item
                 component={SignupForm}
                 changeForm={this.changeForm}
-                style={{ paddingTop: "3rem" }}
+                style={{ paddingTop: "1rem" }}
               />
             )}
           </Paper>

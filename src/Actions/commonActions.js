@@ -36,6 +36,7 @@ const createEntity = (entityData, type, navigate, finalEndpoint) => {
       endpoint: endpoint,
       options: options,
     }).then((resp) => {
+      debugger;
       dispatch({ type: `ADD_${typeUpper}`, payload: resp });
       type === "user" && dispatch({ type: `SET_CURRENT_USER`, payload: resp });
       dispatch({ type: `${typeUpper}_LOADING` });

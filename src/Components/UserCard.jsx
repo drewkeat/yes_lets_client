@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Card, Grid, Typography } from "@mui/material";
-import { selectUserByID } from "../../Reducers/Users/UsersSelectors";
+import { selectUserByID } from "../Reducers/Users/UsersSelectors";
 
 export const UserCard = ({ id, user, ...props }) => {
   const { fullName, email, phoneNumber } = user.attributes;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createEntity, updateEntity } from "../../Actions";
+import { createEntity, updateEntity } from "../Actions";
 
 const SignupForm = ({
   changeForm,

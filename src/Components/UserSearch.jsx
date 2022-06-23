@@ -1,7 +1,7 @@
 import React from "react";
 import { TextField } from "@mui/material";
 import { connect } from "react-redux";
-import { selectUsers } from "../../Reducers/Users/UsersSelectors";
+import { selectUsers } from "../Reducers/Users/UsersSelectors";
 
 export const UserSearch = ({ query, handleChange, ...props }) => {
   const handleSubmit = (e) => {

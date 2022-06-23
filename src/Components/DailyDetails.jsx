@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getAvailabilitiesFromUser } from "../../Reducers/Availabilities/AvailabilitiesSelectors";
-import { getHangtimesFromUser } from "../../Reducers/Hangtimes/HangtimesSelectors";
+import { getAvailabilitiesFromUser } from "../Reducers/Availabilities/AvailabilitiesSelectors";
+import { getHangtimesFromUser } from "../Reducers/Hangtimes/HangtimesSelectors";
 
 const DailyDetails = ({ user, date, availabilities, hangtimes, ...props }) => {
   const renderAvailabilities = () => {

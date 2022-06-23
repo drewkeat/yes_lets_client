@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { loginUser } from "../../Actions/userActions";
+import { loginUser } from "../Actions/userActions";
 
 const LoginForm = ({ loginUser, changeForm, ...props }) => {
   const [state, setState] = useState({

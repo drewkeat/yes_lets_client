@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Card } from "@mui/material";
 
-const SearchResultsPopout = ({ query, users, currentUserID, ...props }) => {
+import { searchUsers } from "../Actions";
+
+const SearchResultsPopout = ({
+  query,
+  users,
+  currentUserID,
+  searchUsers,
+  ...props
+}) => {
+  useEffect(() => {
+    searchUsers(query);
+    //eslint-disable-next-line
+  }, [query]);
+
   const renderUsers = () => {
     let matchUsers = users.filter(
       (user) =>
@@ -24,9 +37,4 @@ const mapStateToProps = (state) => ({
   currentUserID: state.users.current,
 });
 
-const mapDispatchToProps = {};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SearchResultsPopout);
+export default connect(mapStateToProps, { searchUsers })(SearchResultsPopout);

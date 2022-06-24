@@ -15,7 +15,7 @@ const SearchResultsPopout = ({
     searchUsers(query);
     //eslint-disable-next-line
   }, [query]);
-
+  // TODO: ADD "Friend Functionality"
   const renderUsers = () => {
     let matchUsers = users.filter(
       (user) =>

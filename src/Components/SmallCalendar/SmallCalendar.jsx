@@ -13,8 +13,6 @@ const SmallCalendar = ({
   loading,
   ...props
 }) => {
-  // TODO: Update to display availabilities and hangouts
-
   const datesToCheck = availabilities.map((a) => new Date(a.attributes.start));
 
   const tileContent = ({ date, view }) => {

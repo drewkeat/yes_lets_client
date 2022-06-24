@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
-import { Paper } from "@mui/material";
+import { Card, Typography } from "@mui/material";
 
 import { selectCurrentUser } from "../Reducers/Users/UsersSelectors";
 import { createEntity } from "../Actions";
@@ -31,9 +31,13 @@ const NewAvailabilityForm = ({ user, createEntity, ...props }) => {
   };
 
   return (
-    <Paper className="form-container">
+    <Card
+      // elevation={3}
+      raised
+      sx={{ maxWidth: "fit-content", padding: "1rem" }}
+    >
       <form onSubmit={handleSubmit}>
-        <h1 style={{ textAlign: "Center" }}>Create Availability</h1>
+        <Typography variant="h3">Create Availability</Typography>
         <div className="form-control">
           <label htmlFor="start">Start Time</label>
           <br />
@@ -66,7 +70,7 @@ const NewAvailabilityForm = ({ user, createEntity, ...props }) => {
           </button>
         </div>
       </form>
-    </Paper>
+    </Card>
   );
 };
 

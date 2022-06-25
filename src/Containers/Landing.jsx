@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, Paper, Typography } from "@mui/material";
+import { Box, Grid, Paper, Typography } from "@mui/material";
 import { LoginForm, SignupForm } from "../Components";
 import { EventAvailable } from "@mui/icons-material";
 
@@ -16,14 +16,14 @@ class Landing extends Component {
     return (
       <Grid
         container
-        component={"Box"}
+        component={Box}
         height="100vh"
         width="100vw"
         sx={{ flexDirection: { xs: "column-reverse", sm: "row" } }}
       >
         <Grid
           item
-          component={"Box"}
+          component={Box}
           bgcolor={"secondary.main"}
           xs={7}
           sm={4}
@@ -31,6 +31,7 @@ class Landing extends Component {
           sx={{ minWidth: { xs: "100%", sm: "" } }}
         />
         <Grid
+          item
           container
           xs={5}
           sm={8}

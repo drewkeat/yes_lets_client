@@ -9,7 +9,7 @@ import {
 } from "../Reducers/Users/UsersSelectors";
 
 const UserSearch = ({ user, users, ...props }) => {
-  const [query, setQuery] = useState(null);
+  const [query, setQuery] = useState("");
 
   const handleChange = (e) => {
     setQuery(e.target.value);

@@ -1,16 +1,31 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { Card } from "@mui/material";
+import {
+  Button,
+  Card,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 import { searchUsers } from "../Actions";
+import { selectCurrentFriendIDs } from "../Reducers/Users/UsersSelectors";
 
 const SearchResultsPopout = ({
   query,
   users,
   currentUserID,
+  friendIDs,
   searchUsers,
   ...props
 }) => {
+  const handleClick = (e) => {
+    console.log("clicked");
+  };
+
   useEffect(() => {
     searchUsers(query);
     //eslint-disable-next-line
@@ -23,18 +38,42 @@ const SearchResultsPopout = ({
         user.attributes.fullName.toLowerCase().includes(query.toLowerCase())
     );
     return matchUsers.map((user) => (
-      <p key={user.id}>{user.attributes.fullName}</p>
+      <ListItem
+        key={user.id}
+        secondaryAction={
+          !friendIDs.includes(user.id) && (
+            <ListItemIcon sx={{ justifyContent: "end" }}>
+              <ListItemButton onClick={handleClick}>
+                <AddCircleIcon color={"success"} />
+              </ListItemButton>
+            </ListItemIcon>
+          )
+        }
+      >
+        <ListItemButton sx={{}}>
+          <ListItemText>{user.attributes.fullName}</ListItemText>
+          {!friendIDs.includes(user.id)}
+        </ListItemButton>
+      </ListItem>
     ));
   };
   return (
-    <Card sx={{ position: "relative", zIndex: 1 }}>
-      {query && renderUsers()}
+    <Card
+      sx={{
+        position: "absolute",
+        zIndex: 1,
+        // padding: "1rem",
+        // paddingRight: "2rem",
+      }}
+    >
+      <List>{renderUsers()}</List>
     </Card>
   );
 };
 
 const mapStateToProps = (state) => ({
   currentUserID: state.users.current,
+  friendIDs: selectCurrentFriendIDs(state),
 });
 
 export default connect(mapStateToProps, { searchUsers })(SearchResultsPopout);

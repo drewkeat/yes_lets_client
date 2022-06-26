@@ -20,11 +20,15 @@ export const UserCard = ({ id, user, ...props }) => {
           {fullName}
         </Typography>
       </Grid>
-      <Grid item>
-        <Typography variant={"subtitle2"}>{email}</Typography>
+      <Grid item xs={12}>
+        <Typography variant={"subtitle2"} textAlign={"center"}>
+          {email}
+        </Typography>
       </Grid>
-      <Grid item>
-        <Typography variant={"subtitle2"}>{phoneNumber}</Typography>
+      <Grid item xs={12}>
+        <Typography variant={"subtitle2"} textAlign={"center"}>
+          {phoneNumber}
+        </Typography>
       </Grid>
     </Grid>
   );

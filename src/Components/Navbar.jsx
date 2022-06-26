@@ -46,7 +46,7 @@ export const Navbar = (props) => {
   };
 
   const handleCloseUserMenu = (event) => {
-    let path = event.target.parentElement.getAttribute("path");
+    let path = event.target.parentElement.getAttribute("path") || null;
     if (path) {
       navigate(path);
     }

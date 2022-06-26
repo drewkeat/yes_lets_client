@@ -32,7 +32,7 @@ const UserSearch = ({ user, users, ...props }) => {
           onChange={handleChange}
           value={query}
         />
-        <SearchResultsPopout query={query} users={users} />
+        {query && <SearchResultsPopout query={query} users={users} />}
       </form>
     </div>
   );

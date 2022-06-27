@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 
-import { searchUsers } from "../Actions";
+import { searchUsers, createEntity, fetchEntity } from "../Actions";
 import { selectCurrentFriendIDs } from "../Reducers/Users/UsersSelectors";
 
 const SearchResultsPopout = ({
@@ -19,10 +19,16 @@ const SearchResultsPopout = ({
   currentUserID,
   friendIDs,
   searchUsers,
+  createEntity,
+  fetchEntity,
   ...props
 }) => {
   const handleClick = (e) => {
-    console.log("clicked");
+    const friendID = e.currentTarget.getAttribute("friendID");
+    const entityDetails = { user_id: currentUserID, friend_id: friendID };
+    createEntity(entityDetails, "friendship");
+    fetchEntity(currentUserID, "user");
+    console.log(entityDetails);
   };
 
   useEffect(() => {
@@ -42,7 +48,7 @@ const SearchResultsPopout = ({
         secondaryAction={
           !friendIDs.includes(user.id) && (
             <ListItemIcon sx={{ justifyContent: "end" }}>
-              <ListItemButton onClick={handleClick}>
+              <ListItemButton friendID={user.id} onClick={handleClick}>
                 <AddCircleIcon color={"success"} />
               </ListItemButton>
             </ListItemIcon>
@@ -75,4 +81,8 @@ const mapStateToProps = (state) => ({
   friendIDs: selectCurrentFriendIDs(state),
 });
 
-export default connect(mapStateToProps, { searchUsers })(SearchResultsPopout);
+export default connect(mapStateToProps, {
+  searchUsers,
+  createEntity,
+  fetchEntity,
+})(SearchResultsPopout);

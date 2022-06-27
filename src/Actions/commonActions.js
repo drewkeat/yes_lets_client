@@ -20,7 +20,12 @@ const fetchEntity = (id, type) => {
 };
 
 // QUESTION: Why doesn't this method work for user -> dashboard?
-const createEntity = (entityData, type, navigate, finalEndpoint) => {
+const createEntity = (
+  entityData,
+  type,
+  navigate = null,
+  finalEndpoint = null
+) => {
   const endpoint = `/${pluralize(type)}`;
   const typeUpper = type.toUpperCase();
   const options = {
@@ -30,13 +35,14 @@ const createEntity = (entityData, type, navigate, finalEndpoint) => {
     },
     body: JSON.stringify({ [type]: entityData }),
   };
+  console.log(endpoint, options);
   return (dispatch) => {
     dispatch({ type: `${typeUpper}_LOADING` });
     callAPI({
       endpoint: endpoint,
       options: options,
     }).then((resp) => {
-      debugger;
+      console.log(resp);
       dispatch({ type: `ADD_${typeUpper}`, payload: resp });
       type === "user" && dispatch({ type: `SET_CURRENT_USER`, payload: resp });
       dispatch({ type: `${typeUpper}_LOADING` });

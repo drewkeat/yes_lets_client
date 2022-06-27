@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import {
-  Button,
   Card,
   List,
   ListItem,

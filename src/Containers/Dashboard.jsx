@@ -62,6 +62,7 @@ const mapStateToProps = (state) => {
   return {
     loading: state.users.loading,
     currentUser: selectCurrentUser(state),
+    relationships: selectUserRelationships(state),
   };
 };
 export default connect(mapStateToProps, {

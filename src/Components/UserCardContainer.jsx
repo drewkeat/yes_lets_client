@@ -8,9 +8,11 @@ export const UserCardContainer = ({ friendships, cardTitle, ...props }) => {
   const renderFriends = () => {
     const finalArr = [];
     for (let status in friendships) {
-      friendships[status].map((id) => {
-        finalArr.push(<UserCard key={id} id={id} status={status} xs={3} />);
-      });
+      finalArr.push(
+        friendships[status].map((id) => {
+          return <UserCard key={id} id={id} status={status} xs={3} />;
+        })
+      );
     }
     return finalArr;
   };

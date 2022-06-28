@@ -3,7 +3,11 @@ import { connect } from "react-redux";
 
 import { Navbar, SmallCalendar, DailyDetails } from "../Components";
 import { fetchEntity } from "../Actions";
-import { selectCurrentUser } from "../Reducers/Users/UsersSelectors";
+// TODO: add selectUserRelationships to simplify entity fetch process
+import {
+  selectCurrentUser,
+  selectUserRelationships,
+} from "../Reducers/Users/UsersSelectors";
 
 class Dashboard extends Component {
   state = {
@@ -58,6 +62,7 @@ const mapStateToProps = (state) => {
   return {
     loading: state.users.loading,
     currentUser: selectCurrentUser(state),
+    relationships: selectUserRelationships(state),
   };
 };
 export default connect(mapStateToProps, {

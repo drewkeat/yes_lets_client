@@ -35,14 +35,12 @@ const createEntity = (
     },
     body: JSON.stringify({ [type]: entityData }),
   };
-  console.log(endpoint, options);
   return (dispatch) => {
     dispatch({ type: `${typeUpper}_LOADING` });
     callAPI({
       endpoint: endpoint,
       options: options,
     }).then((resp) => {
-      console.log(resp);
       dispatch({ type: `ADD_${typeUpper}`, payload: resp });
       type === "user" && dispatch({ type: `SET_CURRENT_USER`, payload: resp });
       dispatch({ type: `${typeUpper}_LOADING` });

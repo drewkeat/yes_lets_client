@@ -28,7 +28,6 @@ const SearchResultsPopout = ({
     const entityDetails = { user_id: currentUserID, friend_id: friendID };
     createEntity(entityDetails, "friendship");
     fetchEntity(currentUserID, "user");
-    console.log(entityDetails);
   };
 
   useEffect(() => {
@@ -48,9 +47,11 @@ const SearchResultsPopout = ({
         secondaryAction={
           !friendIDs.includes(user.id) && (
             <ListItemIcon sx={{ justifyContent: "end" }}>
-              <ListItemButton friendID={user.id} onClick={handleClick}>
-                <AddCircleIcon color={"success"} />
-              </ListItemButton>
+              <ListItemButton
+                friendID={user.id}
+                onClick={handleClick}
+                children={<AddCircleIcon color={"success"} />}
+              />
             </ListItemIcon>
           )
         }

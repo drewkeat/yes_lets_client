@@ -7,3 +7,4 @@ export { default as UserSearch } from "./UserSearch";
 export { default as UserCard } from "./UserCard";
 export { default as NewAvailabilityForm } from "./NewAvailabilityForm";
 export { default as SearchResultsPopout } from "./SearchResultsPopout";
+export { default as UserCardContainer } from "./UserCardContainer";

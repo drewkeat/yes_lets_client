@@ -1,48 +1,31 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Container, Grid, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 
-import { Navbar, UserSearch, UserCard } from "../Components";
+import { Navbar, UserSearch, UserCardContainer } from "../Components";
 import {
-  selectCurrentFriendIDs,
   selectCurrentUser,
   selectUsers,
+  selectUserRelationships,
 } from "../Reducers/Users/UsersSelectors";
 
 class FriendsNav extends Component {
-  renderFriends = () => {
-    return this.props.friendIDs.map((id) => {
-      return <UserCard key={id} id={id} xs={3} />;
-    });
-  };
-
   render() {
+    const { friends, pendingFriends, friendInvites } = {
+      ...this.props.currentUser,
+    };
+
+    const friendships = {
+      current: friends,
+      pending: pendingFriends,
+      invites: friendInvites,
+    };
     return (
       <>
         <Navbar />
         <Container>
           <UserSearch />
-          <Grid container>
-            {/* FriendCardContainer */}
-            <Grid
-              container
-              justifyContent={"space-around"}
-              columns={4}
-              sx={{ gap: 1 }}
-            >
-              <Grid
-                item
-                component={Typography}
-                variant={"h3"}
-                gutterBottom
-                textAlign="center"
-                xs={4}
-              >
-                Friends
-              </Grid>
-              {this.renderFriends()}
-            </Grid>
-          </Grid>
+          <UserCardContainer friendships={friendships} cardTitle={"Friends"} />
         </Container>
       </>
     );
@@ -52,7 +35,7 @@ class FriendsNav extends Component {
 const mapStateToProps = (state) => ({
   currentUser: selectCurrentUser(state),
   users: selectUsers(state),
-  friendIDs: selectCurrentFriendIDs(state),
+  userRelationships: selectUserRelationships(state),
 });
 
 const mapDispatchToProps = {};

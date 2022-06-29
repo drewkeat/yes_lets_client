@@ -5,7 +5,7 @@ import { Container } from "@mui/material";
 import { Navbar, UserSearch, UserCardContainer } from "../Components";
 import {
   selectCurrentUser,
-  selectUsers,
+  selectOtherUsers,
   selectUserRelationships,
 } from "../Reducers/Users/UsersSelectors";
 
@@ -34,7 +34,7 @@ class FriendsNav extends Component {
 
 const mapStateToProps = (state) => ({
   currentUser: selectCurrentUser(state),
-  users: selectUsers(state),
+  users: selectOtherUsers(state),
   userRelationships: selectUserRelationships(state),
 });
 

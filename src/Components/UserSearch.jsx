@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { SearchResultsPopout } from "./";
 import {
   selectCurrentUser,
-  selectUsers,
+  selectOtherUsers,
 } from "../Reducers/Users/UsersSelectors";
 
 const UserSearch = ({ user, users, ...props }) => {
@@ -40,7 +40,7 @@ const UserSearch = ({ user, users, ...props }) => {
 
 const mapStateToProps = (state) => ({
   currentUser: selectCurrentUser(state),
-  users: selectUsers(state),
+  users: selectOtherUsers(state),
 });
 
 const mapDispatchToProps = {};

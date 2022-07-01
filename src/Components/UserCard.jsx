@@ -11,9 +11,27 @@ import {
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { selectUserByID } from "../Reducers/Users/UsersSelectors";
+import { selectFriendshipByUsers } from "../Reducers/Friendships/friendshipsSelectors";
+import { updateEntity } from "../Actions";
 
-export const UserCard = ({ id, user, status, ...props }) => {
+export const UserCard = ({
+  userID,
+  user,
+  status,
+  friendship,
+  updateEntity,
+  ...props
+}) => {
   const { fullName, email, phoneNumber } = user.attributes;
+
+  const confirmFriend = () => {
+    const updatedFriendship = {
+      id: friendship.id,
+      status: "confirmed",
+    };
+    updateEntity(updatedFriendship, "friendship");
+  };
+
   const statusMap = {
     current: null,
     // (
@@ -32,14 +50,13 @@ export const UserCard = ({ id, user, status, ...props }) => {
     ),
     invites: (
       <Tooltip title="Confirm Friend">
-        <IconButton color="success">
+        <IconButton color="success" onClick={confirmFriend}>
           <PersonAddIcon />
         </IconButton>
       </Tooltip>
     ),
   };
 
-  // TODO: Add 'confirm friend' action
   return (
     <Grid
       item
@@ -72,10 +89,9 @@ export const UserCard = ({ id, user, status, ...props }) => {
   );
 };
 
-const mapStateToProps = (state, { id, ...props }) => ({
-  user: selectUserByID(state, id),
+const mapStateToProps = (state, { userID, ...props }) => ({
+  user: selectUserByID(state, userID),
+  friendship: selectFriendshipByUsers(state, userID),
 });
 
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserCard);
+export default connect(mapStateToProps, { updateEntity })(UserCard);

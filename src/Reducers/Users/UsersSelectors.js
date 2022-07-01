@@ -1,12 +1,15 @@
 import _ from "lodash";
 import { createSelector } from "reselect";
 
-export const selectUsers = (state) => {
+export const selectOtherUsers = (state) => {
   let slice = state.users;
   let usersArr = _.filter(slice, (k) => k.id && k.id !== state.users.current);
   return usersArr;
 };
+
 export const selectUserByID = (state, id) => state.users[id];
+
+export const selectFriendships = (state) => state.friendships;
 
 export const selectCurrentUser = (state) => {
   const userID = state.users.current;
@@ -48,7 +51,7 @@ export const selectPendingFriendIDs = createSelector(
 
 export const selectFriends = createSelector(
   selectCurrentFriendIDs,
-  selectUsers,
+  selectOtherUsers,
   (ids, users) => {
     if (ids) {
       let friendArr = Object.keys(users).filter((key) => ids.includes(key));

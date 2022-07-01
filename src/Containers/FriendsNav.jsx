@@ -3,19 +3,20 @@ import { connect } from "react-redux";
 import { Container } from "@mui/material";
 
 import { Navbar, UserSearch, UserCardContainer } from "../Components";
-import {
-  selectCurrentUser,
-  selectUsers,
-  selectUserRelationships,
-} from "../Reducers/Users/UsersSelectors";
+import { selectCurrentUser } from "../Reducers/Users/UsersSelectors";
+import { fetchEntity } from "../Actions";
 
 class FriendsNav extends Component {
+  componentDidMount() {
+    let user = this.props.currentUser;
+    this.props.fetchEntity(user.id, "user");
+  }
   render() {
     const { friends, pendingFriends, friendInvites } = {
       ...this.props.currentUser,
     };
 
-    const friendships = {
+    const friendTypes = {
       current: friends,
       pending: pendingFriends,
       invites: friendInvites,
@@ -25,7 +26,7 @@ class FriendsNav extends Component {
         <Navbar />
         <Container>
           <UserSearch />
-          <UserCardContainer friendships={friendships} cardTitle={"Friends"} />
+          <UserCardContainer friendTypes={friendTypes} cardTitle={"Friends"} />
         </Container>
       </>
     );
@@ -34,10 +35,8 @@ class FriendsNav extends Component {
 
 const mapStateToProps = (state) => ({
   currentUser: selectCurrentUser(state),
-  users: selectUsers(state),
-  userRelationships: selectUserRelationships(state),
 });
 
-const mapDispatchToProps = {};
+// const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(FriendsNav);
+export default connect(mapStateToProps, { fetchEntity })(FriendsNav);

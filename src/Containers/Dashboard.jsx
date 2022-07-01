@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 
 import { Navbar, SmallCalendar, DailyDetails } from "../Components";
 import { fetchEntity } from "../Actions";
-// TODO: add selectUserRelationships to simplify entity fetch process
 import {
   selectCurrentUser,
   selectUserRelationships,
@@ -15,19 +14,10 @@ class Dashboard extends Component {
   };
 
   componentDidMount() {
-    const user = this.props.currentUser;
-    const userRels = [
-      //QUESTION: Why does my app get hung up on account creation if mapStateToProps is called by the connect HOC?  Error states that friends = null
-      ...user.friends,
-      ...user.pendingFriends,
-      ...user.friendInvites,
-    ];
-    this.props.fetchEntity(user.id, "user");
-    userRels.forEach((id) => this.props.fetchEntity(id, "user"));
-    user.availabilities.forEach((id) =>
-      this.props.fetchEntity(id, "availability")
+    this.props.relationships.forEach((entity) =>
+      this.props.fetchEntity(entity.id, entity.type)
     );
-    user.hangtimes.forEach((id) => this.props.fetchEntity(id, "hangtime"));
+    //QUESTION: Why does my app get hung up on account creation if mapStateToProps is called by the connect HOC?  Error states that friends = null
   }
 
   changeDate = (date) => {

@@ -4,13 +4,15 @@ import { Grid, Typography } from "@mui/material";
 
 import { UserCard } from "../Components";
 
-export const UserCardContainer = ({ friendships, cardTitle, ...props }) => {
+export const UserCardContainer = ({ friendTypes, cardTitle, ...props }) => {
   const renderFriends = () => {
     const finalArr = [];
-    for (let status in friendships) {
+    for (let status in friendTypes) {
       finalArr.push(
-        friendships[status].map((id) => {
-          return <UserCard key={id} id={id} status={status} xs={3} />;
+        friendTypes[status].map((userID) => {
+          return (
+            <UserCard key={userID} userID={userID} status={status} xs={3} />
+          );
         })
       );
     }

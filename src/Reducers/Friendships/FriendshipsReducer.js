@@ -12,6 +12,10 @@ const Friendships = (state = initialState, { type, payload }) => {
       const friendship = payload.friendship;
       return { ...state, ...friendship };
     }
+    case ACTIONS.UPDATE_FRIENDSHIP: {
+      const friendship = payload.friendship;
+      return { ...state, ...friendship };
+    }
     default:
       return state;
   }

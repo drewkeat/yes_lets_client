@@ -27,7 +27,7 @@ export const UserCard = ({
   const confirmFriend = () => {
     const updatedFriendship = {
       id: friendship.id,
-      confirmed: true,
+      status: "confirmed",
     };
     updateEntity(updatedFriendship, "friendship");
   };
@@ -57,7 +57,6 @@ export const UserCard = ({
     ),
   };
 
-  // TODO: Add 'confirm friend' action
   return (
     <Grid
       item

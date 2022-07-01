@@ -6,7 +6,10 @@ export const selectOtherUsers = (state) => {
   let usersArr = _.filter(slice, (k) => k.id && k.id !== state.users.current);
   return usersArr;
 };
+
 export const selectUserByID = (state, id) => state.users[id];
+
+export const selectFriendships = (state) => state.friendships;
 
 export const selectCurrentUser = (state) => {
   const userID = state.users.current;

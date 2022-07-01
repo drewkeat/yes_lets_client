@@ -1,3 +1,7 @@
+import { Card, Container, Grid, IconButton, Typography } from "@mui/material";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+import EditIcon from "@mui/icons-material/Edit";
 import React from "react";
 import { connect } from "react-redux";
 import { getAvailabilitiesFromUser } from "../Reducers/Availabilities/AvailabilitiesSelectors";
@@ -15,9 +19,19 @@ const DailyDetails = ({ user, date, availabilities, hangtimes, ...props }) => {
         const start = new Date(avail.attributes.start).toLocaleTimeString();
         const end = new Date(avail.attributes.end).toLocaleTimeString();
         return (
-          <div key={avail.id}>
-            {start} - {end}
-          </div>
+          <Container key={avail.id}>
+            <Grid container alignItems="center">
+              <Typography variant="subtitle1">
+                {start} - {end}
+              </Typography>
+              <IconButton>
+                <EditIcon />
+              </IconButton>
+              <IconButton>
+                <RemoveCircleIcon color="error" />
+              </IconButton>
+            </Grid>
+          </Container>
         );
       });
     }
@@ -34,22 +48,46 @@ const DailyDetails = ({ user, date, availabilities, hangtimes, ...props }) => {
         const start = new Date(hang.attributes.start).toLocaleTimeString();
         const end = new Date(hang.attributes.end).toLocaleTimeString();
         return (
-          <div key={hang.id}>
-            {start} - {end}
-          </div>
+          <Container key={hang.id}>
+            <Grid container alignItems="center">
+              <Typography variant="subtitle1">
+                {start} - {end}
+              </Typography>
+              <IconButton>
+                <EditIcon />
+              </IconButton>
+              <IconButton>
+                <RemoveCircleIcon color="error" />
+              </IconButton>
+            </Grid>
+          </Container>
         );
       });
     }
   };
 
   return (
-    <div>
-      <h2 style={{ textAlign: "center" }}>{date.toLocaleDateString()}</h2>
-      <h3>Availabilities</h3>
-      {renderAvailabilities()}
-      <h3>Hangtimes</h3>
-      {renderHangtimes()}
-    </div>
+    <Card raised sx={{ mt: 2, padding: 1 }}>
+      <Typography variant="h4" textAlign="center">
+        {date.toLocaleDateString()}
+      </Typography>
+      <Container>
+        <Grid container alignItems="center">
+          <Typography variant="h5">Availabilities</Typography>
+          <IconButton>
+            <AddCircleIcon color="success" />
+          </IconButton>
+          {renderAvailabilities()}
+        </Grid>
+        <Grid container alignItems="center">
+          <Typography variant="h5">Hangtimes</Typography>
+          <IconButton>
+            <AddCircleIcon color="success" />
+          </IconButton>
+          {renderHangtimes()}
+        </Grid>
+      </Container>
+    </Card>
   );
 };
 

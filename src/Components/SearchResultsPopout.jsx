@@ -24,7 +24,7 @@ const SearchResultsPopout = ({
   ...props
 }) => {
   const handleClick = (e) => {
-    const friendID = e.currentTarget.getAttribute("friendID");
+    const friendID = e.currentTarget.getAttribute("friend-id");
     const entityDetails = { user_id: currentUserID, friend_id: friendID };
     createEntity(entityDetails, "friendship");
     fetchEntity(currentUserID, "user");
@@ -48,7 +48,7 @@ const SearchResultsPopout = ({
           !friendIDs.includes(user.id) && (
             <ListItemIcon sx={{ justifyContent: "end" }}>
               <ListItemButton
-                friendID={user.id}
+                friend-id={user.id}
                 onClick={handleClick}
                 children={<AddCircleIcon color={"success"} />}
               />
@@ -64,16 +64,16 @@ const SearchResultsPopout = ({
     ));
   };
   return (
-    <Card
-      sx={{
-        position: "absolute",
-        zIndex: 1,
-        // padding: "1rem",
-        // paddingRight: "2rem",
-      }}
-    >
-      <List>{renderUsers()}</List>
-    </Card>
+    <>
+      <Card
+        sx={{
+          position: "absolute",
+          zIndex: 1,
+        }}
+      >
+        <List>{renderUsers()}</List>
+      </Card>
+    </>
   );
 };
 

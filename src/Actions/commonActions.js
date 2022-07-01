@@ -50,7 +50,7 @@ const createEntity = (
 };
 
 const updateEntity = (entityData, type, navigate, finalEndpoint) => {
-  const endpoint = `/${pluralize(type)}/${entityData.user_id}`;
+  const endpoint = `/${pluralize(type)}/${entityData.id}`;
   const typeUpper = type.toUpperCase();
   const options = {
     method: "PATCH",

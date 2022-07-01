@@ -29,7 +29,7 @@ const SignupForm = ({
         last: lastName,
         email: email,
         phone_number: phoneNumber || "",
-        user_id: id,
+        id: id,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

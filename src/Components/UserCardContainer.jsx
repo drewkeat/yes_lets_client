@@ -9,8 +9,10 @@ export const UserCardContainer = ({ friendships, cardTitle, ...props }) => {
     const finalArr = [];
     for (let status in friendships) {
       finalArr.push(
-        friendships[status].map((id) => {
-          return <UserCard key={id} id={id} status={status} xs={3} />;
+        friendships[status].map((userID) => {
+          return (
+            <UserCard key={userID} userID={userID} status={status} xs={3} />
+          );
         })
       );
     }

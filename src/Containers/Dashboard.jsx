@@ -7,6 +7,7 @@ import {
   selectCurrentUser,
   selectUserRelationships,
 } from "../Reducers/Users/UsersSelectors";
+import { Typography } from "@mui/material";
 
 class Dashboard extends Component {
   state = {
@@ -14,6 +15,7 @@ class Dashboard extends Component {
   };
 
   componentDidMount() {
+    this.props.fetchEntity(this.props.currentUser.id, "user");
     this.props.relationships.forEach((entity) =>
       this.props.fetchEntity(entity.id, entity.type)
     );
@@ -32,7 +34,9 @@ class Dashboard extends Component {
     return (
       <div>
         <Navbar />
-        <h1 style={{ textAlign: "center" }}>Welcome {currentUser.fullName}</h1>
+        <Typography variant="h2" textAlign="center">
+          Welcome {currentUser.fullName}
+        </Typography>
         <div style={{ width: "80%", margin: "auto" }}>
           <SmallCalendar
             date={this.state.selectedDate}

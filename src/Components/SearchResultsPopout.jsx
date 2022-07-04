@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import {
   Card,
+  IconButton,
   List,
   ListItem,
   ListItemButton,
@@ -11,7 +12,10 @@ import {
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 import { searchUsers, createEntity, fetchEntity } from "../Actions";
-import { selectCurrentFriendIDs } from "../Reducers/Users/UsersSelectors";
+import {
+  selectCurrentFriendIDs,
+  selectFriendships,
+} from "../Reducers/Users/UsersSelectors";
 
 const SearchResultsPopout = ({
   query,
@@ -21,6 +25,7 @@ const SearchResultsPopout = ({
   searchUsers,
   createEntity,
   fetchEntity,
+  friendships,
   ...props
 }) => {
   const handleClick = (e) => {
@@ -47,18 +52,15 @@ const SearchResultsPopout = ({
         secondaryAction={
           !friendIDs.includes(user.id) && (
             <ListItemIcon sx={{ justifyContent: "end" }}>
-              <ListItemButton
-                friend-id={user.id}
-                onClick={handleClick}
-                children={<AddCircleIcon color={"success"} />}
-              />
+              <IconButton friend-id={user.id} onClick={handleClick}>
+                <AddCircleIcon color={"success"} />
+              </IconButton>
             </ListItemIcon>
           )
         }
       >
         <ListItemButton sx={{}}>
           <ListItemText>{user.attributes.fullName}</ListItemText>
-          {!friendIDs.includes(user.id)}
         </ListItemButton>
       </ListItem>
     ));
@@ -80,6 +82,7 @@ const SearchResultsPopout = ({
 const mapStateToProps = (state) => ({
   currentUserID: state.users.current,
   friendIDs: selectCurrentFriendIDs(state),
+  friendships: selectFriendships(state),
 });
 
 export default connect(mapStateToProps, {

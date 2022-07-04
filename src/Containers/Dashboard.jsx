@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Container } from "@mui/material";
 
 import { Navbar, SmallCalendar, DailyDetails } from "../Components";
 import { fetchEntity } from "../Actions";
@@ -37,7 +38,7 @@ class Dashboard extends Component {
         <Typography variant="h2" textAlign="center">
           Welcome {currentUser.fullName}
         </Typography>
-        <div style={{ width: "80%", margin: "auto" }}>
+        <Container>
           <SmallCalendar
             date={this.state.selectedDate}
             changeDate={this.changeDate}
@@ -47,7 +48,7 @@ class Dashboard extends Component {
             date={this.state.selectedDate || new Date()}
             user={currentUser}
           />
-        </div>
+        </Container>
       </div>
     );
   }

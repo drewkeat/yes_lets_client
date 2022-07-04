@@ -3,8 +3,8 @@ import { callAPI } from "../Utils/callAPI";
 import pluralize from "pluralize";
 // import _ from "lodash";
 
-const fetchEntity = (id, type) => {
-  const endpoint = `/${pluralize(type)}/${id}`;
+const fetchEntity = (entityID, type) => {
+  const endpoint = `/${pluralize(type)}/${entityID}`;
   const typeUpper = type.toUpperCase();
   // const SET_LOADING = eval(`${ACTIONS}.${entityType}_LOADING`);
   // const ADD_ENTITY = eval(`${ACTIONS}.ADD_${entityType}`);
@@ -72,4 +72,26 @@ const updateEntity = (entityData, type, navigate, finalEndpoint) => {
   };
 };
 
-export { fetchEntity, createEntity, updateEntity };
+const destroyEntity = (entityID, type, navigate, finalEndpoint) => {
+  const endpoint = `/${pluralize(type)}/${entityID}`;
+  const typeUpper = type.toUpperCase();
+  const options = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  return (dispatch) => {
+    dispatch({ type: `${typeUpper}_LOADING` });
+    callAPI({
+      endpoint: endpoint,
+      options: options,
+    }).then((resp) => {
+      dispatch({ type: `DESTROY_${typeUpper}`, payload: resp });
+      dispatch({ type: `${typeUpper}_LOADING` });
+      navigate && navigate(finalEndpoint);
+    });
+  };
+};
+
+export { fetchEntity, createEntity, updateEntity, destroyEntity };

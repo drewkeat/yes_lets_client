@@ -12,6 +12,12 @@ const Availabilities = (state = initialState, { type, payload }) => {
       const availability = payload.availability;
       return { ...state, ...availability };
     }
+    case ACTIONS.DESTROY_AVAILABILITY: {
+      // const availability = payload.availability;
+      // TODO: Handle logic for removing this from state
+      debugger;
+      return { ...state };
+    }
     default:
       return state;
   }

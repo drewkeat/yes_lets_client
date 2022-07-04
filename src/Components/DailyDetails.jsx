@@ -6,8 +6,20 @@ import React from "react";
 import { connect } from "react-redux";
 import { getAvailabilitiesFromUser } from "../Reducers/Availabilities/AvailabilitiesSelectors";
 import { getHangtimesFromUser } from "../Reducers/Hangtimes/HangtimesSelectors";
+import { destroyEntity } from "../Actions";
 
-const DailyDetails = ({ user, date, availabilities, hangtimes, ...props }) => {
+const DailyDetails = ({
+  user,
+  date,
+  availabilities,
+  hangtimes,
+  destroyEntity,
+  ...props
+}) => {
+  const handleRemove = (e, entityData) => {
+    const { id, type } = entityData;
+    destroyEntity(id, type);
+  };
   const renderAvailabilities = () => {
     if (availabilities) {
       let availList = availabilities.filter(
@@ -20,14 +32,19 @@ const DailyDetails = ({ user, date, availabilities, hangtimes, ...props }) => {
         const end = new Date(avail.attributes.end).toLocaleTimeString();
         return (
           <Container key={avail.id}>
-            <Grid container alignItems="center">
+            <Grid container data-entity-id={avail.id} alignItems="center">
               <Typography variant="subtitle1">
                 {start} - {end}
               </Typography>
               <IconButton>
                 <EditIcon />
               </IconButton>
-              <IconButton>
+              <IconButton
+                data-entity-id={avail.id}
+                onClick={(e) =>
+                  handleRemove(e, { type: "availability", id: avail.id })
+                }
+              >
                 <RemoveCircleIcon color="error" />
               </IconButton>
             </Grid>
@@ -49,14 +66,14 @@ const DailyDetails = ({ user, date, availabilities, hangtimes, ...props }) => {
         const end = new Date(hang.attributes.end).toLocaleTimeString();
         return (
           <Container key={hang.id}>
-            <Grid container alignItems="center">
+            <Grid container data-entity-id={hang.id} alignItems="center">
               <Typography variant="subtitle1">
                 {start} - {end}
               </Typography>
               <IconButton>
                 <EditIcon />
               </IconButton>
-              <IconButton>
+              <IconButton data-entity-id={hang.id} onClick={handleRemove}>
                 <RemoveCircleIcon color="error" />
               </IconButton>
             </Grid>
@@ -96,6 +113,4 @@ const mapStateToProps = (state, { user }) => ({
   hangtimes: getHangtimesFromUser(state, user),
 });
 
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(DailyDetails);
+export default connect(mapStateToProps, { destroyEntity })(DailyDetails);

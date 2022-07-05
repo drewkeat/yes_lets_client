@@ -10,3 +10,4 @@ export { default as SearchResultsPopout } from "./SearchResultsPopout";
 export { default as UserCardContainer } from "./UserCardContainer";
 export { default as AvailabilitiesList } from "./AvailabilitiesList";
 export { default as HangtimesList } from "./HangtimesList";
+export { default as AvailabilityListItem } from "./AvailabilityListItem";

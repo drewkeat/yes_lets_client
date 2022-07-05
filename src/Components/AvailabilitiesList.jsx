@@ -6,10 +6,10 @@ import {
   Popover,
   Typography,
 } from "@mui/material";
-import { AddCircle, RemoveCircle, Edit } from "@mui/icons-material";
+import { AddCircle } from "@mui/icons-material";
 import { connect } from "react-redux";
 
-import { NewAvailabilityForm } from "../Components";
+import { NewAvailabilityForm, AvailabilityListItem } from "../Components";
 import { destroyEntity } from "../Actions";
 import { getAvailabilitiesFromUser } from "../Reducers/Availabilities/AvailabilitiesSelectors";
 
@@ -44,27 +44,28 @@ const AvailabilitiesList = ({
           date.toLocaleDateString()
       );
       return availList.map((avail) => {
-        const start = new Date(avail.attributes.start).toLocaleTimeString();
-        const end = new Date(avail.attributes.end).toLocaleTimeString();
+        // const start = new Date(avail.attributes.start).toLocaleTimeString();
+        // const end = new Date(avail.attributes.end).toLocaleTimeString();
         return (
-          <Container key={avail.id}>
-            <Grid container data-entity-id={avail.id} alignItems="center">
-              <Typography variant="subtitle1">
-                {start} - {end}
-              </Typography>
-              <IconButton>
-                <Edit />
-              </IconButton>
-              <IconButton
-                data-entity-id={avail.id}
-                onClick={(e) =>
-                  handleRemove(e, { type: "availability", id: avail.id })
-                }
-              >
-                <RemoveCircle color="error" />
-              </IconButton>
-            </Grid>
-          </Container>
+          <AvailabilityListItem key={avail.id} availability={avail} />
+          // <Container key={avail.id}>
+          //   <Grid container data-entity-id={avail.id} alignItems="center">
+          //     <Typography variant="subtitle1">
+          //       {start} - {end}
+          //     </Typography>
+          //     <IconButton>
+          //       <Edit />
+          //     </IconButton>
+          //     <IconButton
+          //       data-entity-id={avail.id}
+          //       onClick={(e) =>
+          //         handleRemove(e, { type: "availability", id: avail.id })
+          //       }
+          //     >
+          //       <RemoveCircle color="error" />
+          //     </IconButton>
+          //   </Grid>
+          // </Container>
         );
       });
     }

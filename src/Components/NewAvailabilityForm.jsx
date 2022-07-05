@@ -7,7 +7,14 @@ import { Container, Typography } from "@mui/material";
 import { selectCurrentUser } from "../Reducers/Users/UsersSelectors";
 import { createEntity } from "../Actions";
 
-const NewAvailabilityForm = ({ user, createEntity, start, end, ...props }) => {
+const NewAvailabilityForm = ({
+  user,
+  createEntity,
+  start,
+  end,
+  entityID,
+  ...props
+}) => {
   const [state, setState] = useState({
     start: start,
     end: end,

@@ -8,3 +8,5 @@ export { default as UserCard } from "./UserCard";
 export { default as NewAvailabilityForm } from "./NewAvailabilityForm";
 export { default as SearchResultsPopout } from "./SearchResultsPopout";
 export { default as UserCardContainer } from "./UserCardContainer";
+export { default as AvailabilitiesList } from "./AvailabilitiesList";
+export { default as HangtimesList } from "./HangtimesList";

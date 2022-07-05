@@ -1,12 +1,20 @@
-import { Card, Container, Grid, IconButton, Typography } from "@mui/material";
+import React, { useState } from "react";
+import {
+  Card,
+  Container,
+  Grid,
+  IconButton,
+  Menu,
+  Typography,
+} from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import EditIcon from "@mui/icons-material/Edit";
-import React from "react";
 import { connect } from "react-redux";
 import { getAvailabilitiesFromUser } from "../Reducers/Availabilities/AvailabilitiesSelectors";
 import { getHangtimesFromUser } from "../Reducers/Hangtimes/HangtimesSelectors";
 import { destroyEntity } from "../Actions";
+import { NewAvailabilityForm } from "../Components";
 
 const DailyDetails = ({
   user,
@@ -16,10 +24,21 @@ const DailyDetails = ({
   destroyEntity,
   ...props
 }) => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+
   const handleRemove = (e, entityData) => {
     const { id, type } = entityData;
     destroyEntity(id, type);
   };
+
+  const handleAdd = (e) => {
+    setAnchorEl(e.currentTarget);
+  };
+  const handleClose = (e) => {
+    setAnchorEl(null);
+  };
+
   const renderAvailabilities = () => {
     if (availabilities) {
       let availList = availabilities.filter(
@@ -96,9 +115,12 @@ const DailyDetails = ({
       <Container>
         <Grid container alignItems="center">
           <Typography variant="h5">Availabilities</Typography>
-          <IconButton>
+          <IconButton onClick={handleAdd}>
             <AddCircleIcon color="success" />
           </IconButton>
+          <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+            <NewAvailabilityForm />
+          </Menu>
           {renderAvailabilities()}
         </Grid>
         <Grid container alignItems="center">

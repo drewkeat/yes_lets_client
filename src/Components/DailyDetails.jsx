@@ -4,7 +4,7 @@ import {
   Container,
   Grid,
   IconButton,
-  Menu,
+  Popover,
   Typography,
 } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
@@ -25,6 +25,7 @@ const DailyDetails = ({
   ...props
 }) => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [newForm, setNewForm] = useState(null);
   const open = Boolean(anchorEl);
 
   const handleRemove = (e, entityData) => {
@@ -34,9 +35,12 @@ const DailyDetails = ({
 
   const handleAdd = (e) => {
     setAnchorEl(e.currentTarget);
+    e.currentTarget.key ? setNewForm(false) : setNewForm(true);
   };
+
   const handleClose = (e) => {
     setAnchorEl(null);
+    e.currentTarget.key ? setNewForm(false) : setNewForm(true);
   };
 
   const renderAvailabilities = () => {
@@ -89,9 +93,6 @@ const DailyDetails = ({
               <Typography variant="subtitle1">
                 {start} - {end}
               </Typography>
-              <IconButton>
-                <EditIcon />
-              </IconButton>
               <IconButton
                 data-entity-id={hang.id}
                 onClick={(e) =>
@@ -118,9 +119,13 @@ const DailyDetails = ({
           <IconButton onClick={handleAdd}>
             <AddCircleIcon color="success" />
           </IconButton>
-          <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-            <NewAvailabilityForm />
-          </Menu>
+          <Popover
+            anchorEl={anchorEl}
+            open={open && newForm}
+            onClose={handleClose}
+          >
+            <NewAvailabilityForm start={date} end={date} />
+          </Popover>
           {renderAvailabilities()}
         </Grid>
         <Grid container alignItems="center">

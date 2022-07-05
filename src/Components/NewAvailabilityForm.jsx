@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
-import { Card, Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 
 import { selectCurrentUser } from "../Reducers/Users/UsersSelectors";
 import { createEntity } from "../Actions";
 
-const NewAvailabilityForm = ({ user, createEntity, ...props }) => {
+const NewAvailabilityForm = ({ user, createEntity, start, end, ...props }) => {
   const [state, setState] = useState({
-    start: moment(),
-    end: moment(),
+    start: start,
+    end: end,
   });
 
   const navigate = useNavigate();
@@ -31,13 +31,11 @@ const NewAvailabilityForm = ({ user, createEntity, ...props }) => {
   };
 
   return (
-    <Card
-      // elevation={3}
-      raised
-      sx={{ maxWidth: "fit-content", padding: "1rem" }}
-    >
+    <Container>
       <form onSubmit={handleSubmit}>
-        <Typography variant="h3">Create Availability</Typography>
+        <Typography variant="h3">
+          {entityID ? entityID : "Create Availability"}
+        </Typography>
         <div className="form-control">
           <label htmlFor="start">Start Time</label>
           <br />
@@ -70,7 +68,7 @@ const NewAvailabilityForm = ({ user, createEntity, ...props }) => {
           </button>
         </div>
       </form>
-    </Card>
+    </Container>
   );
 };
 

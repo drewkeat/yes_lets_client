@@ -5,11 +5,7 @@ import { RemoveCircle, Edit } from "@mui/icons-material";
 
 import { destroyEntity } from "../Actions";
 
-export const AvailabilityListItem = ({
-  availability,
-  destroyEntity,
-  ...props
-}) => {
+const AvailabilityListItem = ({ availability, destroyEntity, ...props }) => {
   const start = new Date(availability.attributes.start).toLocaleTimeString();
   const end = new Date(availability.attributes.end).toLocaleTimeString();
 

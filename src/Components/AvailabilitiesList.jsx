@@ -23,11 +23,6 @@ const AvailabilitiesList = ({
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
-  const handleRemove = (e, entityData) => {
-    const { id, type } = entityData;
-    destroyEntity(id, type);
-  };
-
   const handleAdd = (e) => {
     setAnchorEl(e.currentTarget);
   };
@@ -44,29 +39,7 @@ const AvailabilitiesList = ({
           date.toLocaleDateString()
       );
       return availList.map((avail) => {
-        // const start = new Date(avail.attributes.start).toLocaleTimeString();
-        // const end = new Date(avail.attributes.end).toLocaleTimeString();
-        return (
-          <AvailabilityListItem key={avail.id} availability={avail} />
-          // <Container key={avail.id}>
-          //   <Grid container data-entity-id={avail.id} alignItems="center">
-          //     <Typography variant="subtitle1">
-          //       {start} - {end}
-          //     </Typography>
-          //     <IconButton>
-          //       <Edit />
-          //     </IconButton>
-          //     <IconButton
-          //       data-entity-id={avail.id}
-          //       onClick={(e) =>
-          //         handleRemove(e, { type: "availability", id: avail.id })
-          //       }
-          //     >
-          //       <RemoveCircle color="error" />
-          //     </IconButton>
-          //   </Grid>
-          // </Container>
-        );
+        return <AvailabilityListItem key={avail.id} availability={avail} />;
       });
     }
   };

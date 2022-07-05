@@ -10,11 +10,9 @@ export const callAPI = ({ endpoint, options }) => {
     return fetch(fullUrl, options)
       .then((resp) => {
         // TODO: Handle Errors in API Calls
-        // debugger;
         return resp.json();
       })
       .then((json) => {
-        // debugger;
         return normalize(json);
       });
   };

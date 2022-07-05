@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Container } from "@mui/material";
+import { Box, Container } from "@mui/material";
 
-import { Navbar, SmallCalendar, DailyDetails } from "../Components";
+import { Navbar, SmallCalendar, DailyDetails, UserSearch } from "../Components";
 import { fetchEntity } from "../Actions";
 import {
   selectCurrentUser,
@@ -20,7 +20,6 @@ class Dashboard extends Component {
     this.props.relationships.forEach((entity) =>
       this.props.fetchEntity(entity.id, entity.type)
     );
-    //QUESTION: Why does my app get hung up on account creation if mapStateToProps is called by the connect HOC?  Error states that friends = null
   }
 
   changeDate = (date) => {
@@ -28,17 +27,25 @@ class Dashboard extends Component {
   };
 
   render() {
-    const { currentUser, loading } = this.props;
-    if (loading) {
-      return <div> Loading </div>;
-    }
+    const { currentUser } = this.props;
+    // if (loading) {
+    //   return <div> Loading </div>;
+    // }
     return (
       <div>
         <Navbar />
-        <Typography variant="h2" textAlign="center">
-          Welcome {currentUser.fullName}
-        </Typography>
-        <Container>
+        <Container fluid>
+          <Box display="flex" justifyContent={"end"}>
+            <Box display="flex" gap={2} alignItems="center">
+              <Typography variant="h6" textAlign={"center"}>
+                Friends
+              </Typography>
+              <UserSearch />
+            </Box>
+          </Box>
+          <Typography variant="h2" textAlign="center">
+            Welcome {currentUser.fullName}
+          </Typography>
           <SmallCalendar
             date={this.state.selectedDate}
             changeDate={this.changeDate}
@@ -55,7 +62,7 @@ class Dashboard extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    loading: state.users.loading,
+    // loading: state.users.loading,
     currentUser: selectCurrentUser(state),
     relationships: selectUserRelationships(state),
   };

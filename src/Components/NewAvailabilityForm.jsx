@@ -1,19 +1,24 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import moment from "moment";
-import { Card, Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 
 import { selectCurrentUser } from "../Reducers/Users/UsersSelectors";
-import { createEntity } from "../Actions";
+import { createEntity, updateEntity } from "../Actions";
 
-const NewAvailabilityForm = ({ user, createEntity, ...props }) => {
+const NewAvailabilityForm = ({
+  user,
+  createEntity,
+  updateEntity,
+  start,
+  end,
+  entityID,
+  ...props
+}) => {
   const [state, setState] = useState({
-    start: moment(),
-    end: moment(),
+    start: start,
+    end: end,
   });
-
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const newDate = new Date(e.target.value);
@@ -22,22 +27,20 @@ const NewAvailabilityForm = ({ user, createEntity, ...props }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createEntity(
-      { ...state, user_id: user.id },
-      "availability",
-      navigate,
-      "/dashboard"
-    );
+    entityID
+      ? updateEntity(
+          { ...state, user_id: user.id, id: entityID },
+          "availability"
+        )
+      : createEntity({ ...state, user_id: user.id }, "availability");
   };
 
   return (
-    <Card
-      // elevation={3}
-      raised
-      sx={{ maxWidth: "fit-content", padding: "1rem" }}
-    >
+    <Container>
       <form onSubmit={handleSubmit}>
-        <Typography variant="h3">Create Availability</Typography>
+        <Typography variant="h3">
+          {entityID ? "Update Availability" : "Create Availability"}
+        </Typography>
         <div className="form-control">
           <label htmlFor="start">Start Time</label>
           <br />
@@ -61,7 +64,9 @@ const NewAvailabilityForm = ({ user, createEntity, ...props }) => {
           />
         </div>
         <div className="form-control">
-          <button type="submit">Create Availability</button>
+          <button type="submit">
+            {entityID ? "Update Availability" : "Create Availability"}
+          </button>
           <button
             type="reset"
             onClick={() => setState({ start: moment(), end: moment() })}
@@ -70,7 +75,7 @@ const NewAvailabilityForm = ({ user, createEntity, ...props }) => {
           </button>
         </div>
       </form>
-    </Card>
+    </Container>
   );
 };
 
@@ -78,4 +83,6 @@ const mapStateToProps = (state) => ({
   user: selectCurrentUser(state),
 });
 
-export default connect(mapStateToProps, { createEntity })(NewAvailabilityForm);
+export default connect(mapStateToProps, { createEntity, updateEntity })(
+  NewAvailabilityForm
+);

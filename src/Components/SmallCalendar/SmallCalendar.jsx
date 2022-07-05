@@ -4,7 +4,7 @@ import Calendar from "react-calendar";
 
 import { getAvailabilitiesFromUser } from "../../Reducers/Availabilities/AvailabilitiesSelectors";
 import "./Calendar.css";
-
+// QUESTION: Why does this component update for PATCH, but not CREATE?
 const SmallCalendar = ({
   changeDate,
   date,

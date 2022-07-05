@@ -14,8 +14,6 @@ const Availabilities = (state = initialState, { type, payload }) => {
       return { ...state, ...availability };
     }
     case ACTIONS.DESTROY_AVAILABILITY: {
-      // const availability = payload.availability;
-      // TODO: Handle logic for removing this from state
       const newState = { ...state };
       delete newState[_.keys(payload.availability)[0]];
       return { ...newState };

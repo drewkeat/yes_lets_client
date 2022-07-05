@@ -73,7 +73,12 @@ const DailyDetails = ({
               <IconButton>
                 <EditIcon />
               </IconButton>
-              <IconButton data-entity-id={hang.id} onClick={handleRemove}>
+              <IconButton
+                data-entity-id={hang.id}
+                onClick={(e) =>
+                  handleRemove(e, { type: "hangtime", id: hang.id })
+                }
+              >
                 <RemoveCircleIcon color="error" />
               </IconButton>
             </Grid>

@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 
 import { NewAvailabilityForm, AvailabilityListItem } from "../Components";
 import { destroyEntity } from "../Actions";
-import { getAvailabilitiesFromUser } from "../Reducers/Availabilities/AvailabilitiesSelectors";
+import { getAvailabilitiesForUser } from "../Reducers/Availabilities/AvailabilitiesSelectors";
 
 const AvailabilitiesList = ({
   user,
@@ -61,7 +61,7 @@ const AvailabilitiesList = ({
 };
 
 const mapStateToProps = (state, { user, ...props }) => ({
-  availabilities: getAvailabilitiesFromUser(state, user),
+  availabilities: getAvailabilitiesForUser(state, user),
 });
 
 export default connect(mapStateToProps, { destroyEntity })(AvailabilitiesList);

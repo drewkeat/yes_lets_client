@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import _ from "lodash";
 import {
   Card,
   IconButton,
@@ -8,37 +9,106 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Tooltip,
 } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
-import { searchUsers, createEntity, fetchEntity } from "../Actions";
+import {
+  searchUsers,
+  createEntity,
+  fetchEntity,
+  updateEntity,
+} from "../Actions";
 import {
   selectCurrentFriendIDs,
+  selectFriendInvites,
   selectFriendships,
+  selectPendingFriendIDs,
 } from "../Reducers/Users/UsersSelectors";
 
 const SearchResultsPopout = ({
   query,
   users,
   currentUserID,
-  friendIDs,
+  currentFriendIDs,
+  pendingFriendIDs,
+  inviteFriendIDs,
   searchUsers,
   createEntity,
   fetchEntity,
+  updateEntity,
   friendships,
   ...props
 }) => {
-  const handleClick = (e) => {
+  useEffect(() => {
+    searchUsers(query);
+    //eslint-disable-next-line
+  }, [query]);
+
+  const handleAdd = (e) => {
     const friendID = e.currentTarget.getAttribute("friend-id");
     const entityDetails = { user_id: currentUserID, friend_id: friendID };
     createEntity(entityDetails, "friendship");
     fetchEntity(currentUserID, "user");
   };
 
-  useEffect(() => {
-    searchUsers(query);
-    //eslint-disable-next-line
-  }, [query]);
+  const handleConfirm = (e) => {
+    const friendID = e.currentTarget.getAttribute("friend-id");
+    const friendship = _.find(
+      friendships,
+      (f) =>
+        f.relationships &&
+        f.relationships.user.data.id === friendID &&
+        f.relationships.friend.data.id === currentUserID.toString()
+    );
+    const entityDetails = { id: friendship.id, status: "confirmed" };
+    console.log(
+      `handleConfirm calls update entity with these details:`,
+      entityDetails
+    );
+    updateEntity(entityDetails, "friendship");
+    fetchEntity(currentUserID, "user");
+  };
+
+  const renderButton = (user) => {
+    if (pendingFriendIDs.includes(user.id)) {
+      return (
+        <ListItemIcon sx={{ justifyContent: "end" }}>
+          <Tooltip title="Pending Response">
+            <IconButton friend-id={user.id}>
+              <AccessTimeIcon color="info" />
+            </IconButton>
+          </Tooltip>
+        </ListItemIcon>
+      );
+    }
+    if (inviteFriendIDs.includes(user.id)) {
+      return (
+        <ListItemIcon sx={{ justifyContent: "end" }}>
+          <Tooltip title="Confirm Friend">
+            <IconButton friend-id={user.id} onClick={handleConfirm}>
+              <PersonAddIcon color="primary" />
+            </IconButton>
+          </Tooltip>
+        </ListItemIcon>
+      );
+    }
+    if (currentFriendIDs.includes(user.id)) {
+      return null;
+    }
+    return (
+      <ListItemIcon sx={{ justifyContent: "end" }}>
+        <Tooltip title="Add Friend">
+          <IconButton friend-id={user.id} onClick={handleAdd}>
+            <AddCircleIcon color="success" />
+          </IconButton>
+        </Tooltip>
+      </ListItemIcon>
+    );
+  };
+
   // TODO: ADD "Friend Functionality"
   const renderUsers = () => {
     let matchUsers = users.filter(
@@ -50,13 +120,7 @@ const SearchResultsPopout = ({
       <ListItem
         key={user.id}
         secondaryAction={
-          !friendIDs.includes(user.id) && (
-            <ListItemIcon sx={{ justifyContent: "end" }}>
-              <IconButton friend-id={user.id} onClick={handleClick}>
-                <AddCircleIcon color={"success"} />
-              </IconButton>
-            </ListItemIcon>
-          )
+          !currentFriendIDs.includes(user.id) && renderButton(user)
         }
       >
         <ListItemButton sx={{}}>
@@ -81,7 +145,9 @@ const SearchResultsPopout = ({
 
 const mapStateToProps = (state) => ({
   currentUserID: state.users.current,
-  friendIDs: selectCurrentFriendIDs(state),
+  currentFriendIDs: selectCurrentFriendIDs(state),
+  pendingFriendIDs: selectPendingFriendIDs(state),
+  inviteFriendIDs: selectFriendInvites(state),
   friendships: selectFriendships(state),
 });
 
@@ -89,4 +155,5 @@ export default connect(mapStateToProps, {
   searchUsers,
   createEntity,
   fetchEntity,
+  updateEntity,
 })(SearchResultsPopout);

@@ -33,6 +33,8 @@ class Landing extends Component {
         <Grid
           item
           container
+          component={Paper}
+          elevation={15}
           xs={5}
           sm={8}
           md={6}

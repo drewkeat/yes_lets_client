@@ -1,13 +1,10 @@
 // import ACTIONS from "./actionTypes";
 import { callAPI } from "../Utils/callAPI";
 import pluralize from "pluralize";
-// import _ from "lodash";
 
 const fetchEntity = (entityID, type) => {
   const endpoint = `/${pluralize(type)}/${entityID}`;
   const typeUpper = type.toUpperCase();
-  // const SET_LOADING = eval(`${ACTIONS}.${entityType}_LOADING`);
-  // const ADD_ENTITY = eval(`${ACTIONS}.ADD_${entityType}`);
   return (dispatch) => {
     dispatch({ type: `${typeUpper}_LOADING` });
     callAPI({
@@ -19,7 +16,6 @@ const fetchEntity = (entityID, type) => {
   };
 };
 
-// QUESTION: Why doesn't this method work for user -> dashboard?
 const createEntity = (
   entityData,
   type,

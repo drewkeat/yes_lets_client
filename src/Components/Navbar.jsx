@@ -40,8 +40,8 @@ export const Navbar = (props) => {
   };
 
   const handleCloseNavMenu = (event) => {
-    let path = event.target.getAttribute("path");
-    navigate(path);
+    let path = event.target.getAttribute("path") || null;
+    path && navigate(path);
     setAnchorElNav(null);
   };
 

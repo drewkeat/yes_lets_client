@@ -44,9 +44,12 @@ export const selectCurrentFriendIDs = createSelector(
 
 export const selectPendingFriendIDs = createSelector(
   selectCurrentUser,
-  (currentUser) => {
-    return currentUser.pendingFriends;
-  }
+  (currentUser) => currentUser.pendingFriends
+);
+
+export const selectFriendInvites = createSelector(
+  selectCurrentUser,
+  (currentUser) => currentUser.friendInvites
 );
 
 export const selectFriends = createSelector(

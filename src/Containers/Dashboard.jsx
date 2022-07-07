@@ -34,7 +34,7 @@ class Dashboard extends Component {
     return (
       <div>
         <Navbar />
-        <Container fluid>
+        <Container maxWidth={"xl"}>
           <Box display="flex" justifyContent={"end"}>
             <Box display="flex" gap={2} alignItems="center">
               <Typography variant="h6" textAlign={"center"}>

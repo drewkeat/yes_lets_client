@@ -16,6 +16,7 @@ const searchUsers = (query) => {
       options: options,
     }).then((resp) => {
       dispatch({ type: ACTIONS.ADD_USER, payload: resp });
+      // NOTE: This may break if multiple users are returned... fix included below vvv
       // for (let user in resp.user) {
       //   dispatch({ type: ACTIONS.ADD_USER, payload: resp });
       // }

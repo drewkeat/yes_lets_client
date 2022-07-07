@@ -1,6 +1,6 @@
-export const getAvailabilitiesFromUser = (state, user) => {
-  const availabilitiesMap = user.availabilities.map(
-    (id) => state.availabilities[id] || null
+import _ from "lodash";
+export const getAvailabilitiesForUser = (state, user) =>
+  _.filter(
+    state.availabilities,
+    (avail) => _.get(avail, "relationships.user.data.id") === user.id
   );
-  return availabilitiesMap.filter((i) => i !== null);
-};

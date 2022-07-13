@@ -7,7 +7,12 @@ export const selectOtherUsers = (state) => {
   return usersArr;
 };
 
-export const selectUserByID = (state, id) => state.users[id];
+export const selectUserByID = (state, ids) => {
+  if (ids.length > 1) {
+    return ids.map((id) => state.users[id]);
+  }
+  return state.users[ids];
+};
 
 export const selectFriendships = (state) => state.friendships;
 
@@ -16,8 +21,11 @@ export const selectCurrentUser = (state) => {
   return userID ? buildUser(state.users[userID]) : null;
 };
 
-export const selectUserRelationships = (state) => {
-  const user = state.users[state.users.current];
+export const selectUserRelationships = (
+  state,
+  userId = state.users.current
+) => {
+  const user = state.users[userId];
   return _.valuesIn(_.mapValues(user.relationships, "data")).flat();
 };
 
@@ -64,3 +72,5 @@ export const selectFriends = createSelector(
     return null;
   }
 );
+
+// export const selectUsersFromIds = createSelector(selectUserByID, users);

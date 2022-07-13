@@ -6,6 +6,7 @@ import {
   FormContainer,
   FriendsNav,
 } from "../Containers";
+import Profile from "../Containers/Profile";
 function RoutesConfig() {
   return (
     <Routes>
@@ -14,6 +15,9 @@ function RoutesConfig() {
       <Route path="/account" element={<Account />} />
       <Route path="/friends" element={<FriendsNav />} />
       <Route path="/new-availability" element={<FormContainer />} />
+      <Route path="/users">
+        <Route path=":id" element={<Profile />} />
+      </Route>
     </Routes>
   );
 }

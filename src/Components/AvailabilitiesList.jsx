@@ -52,7 +52,11 @@ const AvailabilitiesList = ({
           <AddCircle color="success" />
         </IconButton>
         <Popover anchorEl={anchorEl} open={open} onClose={handleClose}>
-          <NewAvailabilityForm start={date} end={date} />
+          <NewAvailabilityForm
+            start={date}
+            end={date}
+            handleClose={handleClose}
+          />
         </Popover>
         {renderAvailabilities()}
       </Grid>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Box, Container } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 
 import { Navbar, SmallCalendar, DailyDetails, UserSearch } from "../Components";
 import { fetchEntity } from "../Actions";
@@ -8,7 +8,6 @@ import {
   selectCurrentUser,
   selectUserRelationships,
 } from "../Reducers/Users/UsersSelectors";
-import { Typography } from "@mui/material";
 
 class Dashboard extends Component {
   state = {
@@ -32,7 +31,7 @@ class Dashboard extends Component {
     //   return <div> Loading </div>;
     // }
     return (
-      <div>
+      <Box>
         <Navbar />
         <Container maxWidth={"xl"}>
           <Box display="flex" justifyContent={"end"}>
@@ -56,7 +55,7 @@ class Dashboard extends Component {
             user={currentUser}
           />
         </Container>
-      </div>
+      </Box>
     );
   }
 }

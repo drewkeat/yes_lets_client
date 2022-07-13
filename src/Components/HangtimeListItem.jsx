@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Container, Grid, Typography, IconButton } from "@mui/material";
 import { RemoveCircle } from "@mui/icons-material";
+import { destroyEntity } from "../Actions";
 import {
   selectCurrentUser,
   selectUserByID,
@@ -63,4 +64,4 @@ const mapStateToProps = (state, { hangtime, ...props }) => ({
   currentUser: selectCurrentUser(state),
 });
 
-export default connect(mapStateToProps)(HangtimeListItem);
+export default connect(mapStateToProps, { destroyEntity })(HangtimeListItem);

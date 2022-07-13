@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import _ from "lodash";
 import {
   Card,
@@ -47,6 +48,8 @@ const SearchResultsPopout = ({
     //eslint-disable-next-line
   }, [query]);
 
+  const navigate = useNavigate();
+
   const handleAdd = (e) => {
     const friendID = e.currentTarget.getAttribute("friend-id");
     const entityDetails = { user_id: currentUserID, friend_id: friendID };
@@ -66,6 +69,10 @@ const SearchResultsPopout = ({
     const entityDetails = { id: friendship.id, status: "confirmed" };
     updateEntity(entityDetails, "friendship");
     fetchEntity(currentUserID, "user");
+  };
+
+  const handleNavigate = (e, id) => {
+    navigate("/users/" + id);
   };
 
   const renderButton = (user) => {
@@ -105,7 +112,6 @@ const SearchResultsPopout = ({
     );
   };
 
-  // TODO: ADD "Friend Functionality"
   const renderUsers = () => {
     let matchUsers = users.filter(
       (user) =>
@@ -119,12 +125,17 @@ const SearchResultsPopout = ({
           !currentFriendIDs.includes(user.id) && renderButton(user)
         }
       >
-        <ListItemButton sx={{}}>
+        {currentFriendIDs.includes(user.id) ? (
+          <ListItemButton sx={{}} onClick={(e) => handleNavigate(e, user.id)}>
+            <ListItemText>{user.attributes.fullName}</ListItemText>
+          </ListItemButton>
+        ) : (
           <ListItemText>{user.attributes.fullName}</ListItemText>
-        </ListItemButton>
+        )}
       </ListItem>
     ));
   };
+
   return (
     <>
       <Card

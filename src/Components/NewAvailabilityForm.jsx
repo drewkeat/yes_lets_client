@@ -13,6 +13,7 @@ const NewAvailabilityForm = ({
   start,
   end,
   entityID,
+  handleClose,
   ...props
 }) => {
   const [state, setState] = useState({
@@ -33,6 +34,7 @@ const NewAvailabilityForm = ({
           "availability"
         )
       : createEntity({ ...state, user_id: user.id }, "availability");
+    handleClose();
   };
 
   return (

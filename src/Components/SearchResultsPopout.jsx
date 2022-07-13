@@ -64,10 +64,6 @@ const SearchResultsPopout = ({
         f.relationships.friend.data.id === currentUserID.toString()
     );
     const entityDetails = { id: friendship.id, status: "confirmed" };
-    console.log(
-      `handleConfirm calls update entity with these details:`,
-      entityDetails
-    );
     updateEntity(entityDetails, "friendship");
     fetchEntity(currentUserID, "user");
   };

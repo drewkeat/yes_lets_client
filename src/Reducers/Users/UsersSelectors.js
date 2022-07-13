@@ -7,7 +7,7 @@ export const selectOtherUsers = (state) => {
   return usersArr;
 };
 
-export const selectUserByID = (state, id) => state.users[id];
+export const selectUserByID = (state, ids) => ids.map((id) => state.users[id]);
 
 export const selectFriendships = (state) => state.friendships;
 
@@ -64,3 +64,5 @@ export const selectFriends = createSelector(
     return null;
   }
 );
+
+// export const selectUsersFromIds = createSelector(selectUserByID, users);

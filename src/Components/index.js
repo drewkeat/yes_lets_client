@@ -12,3 +12,4 @@ export { default as AvailabilitiesList } from "./AvailabilitiesList";
 export { default as HangtimesList } from "./HangtimesList";
 export { default as AvailabilityListItem } from "./AvailabilityListItem";
 export { default as HangtimeListItem } from "./HangtimeListItem";
+export { default as SmallDetails } from "./SmallDetails";

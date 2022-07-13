@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Box, Container, Typography } from "@mui/material";
-import { Navbar, UserSearch, SmallCalendar } from "../Components";
+import { Navbar, UserSearch, SmallCalendar, SmallDetails } from "../Components";
 import withRouter from "../Utils/withRouter";
 import { fetchEntity } from "../Actions";
 import {
@@ -28,14 +28,6 @@ export class Profile extends Component {
   render() {
     const { pageUser } = this.props;
     return (
-      // <Box>
-      //   <Navbar />
-      //   <Container>
-      //     <Typography variant="h2" textAlign="center">
-      //       {pageUser.attributes.fullName}
-      //     </Typography>
-      //   </Container>
-      // </Box>
       <Box>
         <Navbar />
         <Container maxWidth={"xl"}>
@@ -55,6 +47,7 @@ export class Profile extends Component {
             changeDate={this.changeDate}
             user={pageUser}
           />
+          <SmallDetails user={pageUser} date={this.state.selectedDate} />
         </Container>
       </Box>
     );

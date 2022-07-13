@@ -1,25 +1,60 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Box, Container, Typography } from "@mui/material";
-import { Navbar } from "../Components";
+import { Navbar, UserSearch, SmallCalendar } from "../Components";
 import withRouter from "../Utils/withRouter";
 import { fetchEntity } from "../Actions";
-import { selectUserByID } from "../Reducers/Users/UsersSelectors";
+import {
+  selectUserByID,
+  selectUserRelationships,
+} from "../Reducers/Users/UsersSelectors";
 
 export class Profile extends Component {
+  state = {
+    selectedDate: new Date(),
+  };
+
   componentDidMount() {
-    console.log("mounted");
+    this.props.fetchEntity(this.props.pageUser.id, "user");
+    this.props.relationships.forEach((entity) =>
+      this.props.fetchEntity(entity.id, entity.type)
+    );
   }
+
+  changeDate = (date) => {
+    this.setState({ ...this.state, selectedDate: date });
+  };
 
   render() {
     const { pageUser } = this.props;
     return (
+      // <Box>
+      //   <Navbar />
+      //   <Container>
+      //     <Typography variant="h2" textAlign="center">
+      //       {pageUser.attributes.fullName}
+      //     </Typography>
+      //   </Container>
+      // </Box>
       <Box>
         <Navbar />
-        <Container>
+        <Container maxWidth={"xl"}>
+          <Box display="flex" justifyContent={"end"}>
+            <Box display="flex" gap={2} alignItems="center">
+              <Typography variant="h6" textAlign={"center"}>
+                Friends
+              </Typography>
+              <UserSearch />
+            </Box>
+          </Box>
           <Typography variant="h2" textAlign="center">
             {pageUser.attributes.fullName}
           </Typography>
+          <SmallCalendar
+            date={this.state.selectedDate}
+            changeDate={this.changeDate}
+            user={pageUser}
+          />
         </Container>
       </Box>
     );
@@ -28,10 +63,7 @@ export class Profile extends Component {
 
 const mapStateToProps = (state, props) => ({
   pageUser: selectUserByID(state, props.router.params.id),
+  relationships: selectUserRelationships(state, props.router.params.id),
 });
 
-const mapDispatchToProps = {};
-
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(Profile)
-);
+export default withRouter(connect(mapStateToProps, { fetchEntity })(Profile));

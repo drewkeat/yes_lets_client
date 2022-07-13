@@ -5,6 +5,5 @@ export const getHangtimesFromUser = (state, user) => {
 
 export const getHangtimeUsers = (state, hangtimeID) => {
   const hangtime = state.hangtimes[hangtimeID];
-  debugger;
   return hangtime.relationships.users.data.map((user) => state.users[user.id]);
 };

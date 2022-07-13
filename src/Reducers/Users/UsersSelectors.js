@@ -21,8 +21,11 @@ export const selectCurrentUser = (state) => {
   return userID ? buildUser(state.users[userID]) : null;
 };
 
-export const selectUserRelationships = (state) => {
-  const user = state.users[state.users.current];
+export const selectUserRelationships = (
+  state,
+  userId = state.users.current
+) => {
+  const user = state.users[userId];
   return _.valuesIn(_.mapValues(user.relationships, "data")).flat();
 };
 

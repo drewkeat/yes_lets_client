@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { Container, Grid, Typography, IconButton } from "@mui/material";
 import { RemoveCircle } from "@mui/icons-material";
 import {
@@ -16,6 +17,7 @@ const HangtimeListItem = ({
 }) => {
   const start = new Date(hangtime.attributes.start).toLocaleTimeString();
   const end = new Date(hangtime.attributes.end).toLocaleTimeString();
+  // const navigate = useNavigate()
 
   const handleRemove = (e, entityData) => {
     const { id, type } = entityData;
@@ -25,9 +27,11 @@ const HangtimeListItem = ({
   const renderHangtimeUsers = () => {
     const otherUsers = users.filter((user) => user.id !== currentUser.id);
     return otherUsers.map((user) => (
-      <Typography key={user.id} variant="subtitle1" mr={3}>
-        {user.attributes.fullName}
-      </Typography>
+      <Link to={"/users/" + user.id}>
+        <Typography key={user.id} variant="subtitle1" mr={3}>
+          {user.attributes.fullName}
+        </Typography>
+      </Link>
     ));
   };
 

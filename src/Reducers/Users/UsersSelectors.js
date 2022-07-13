@@ -7,7 +7,12 @@ export const selectOtherUsers = (state) => {
   return usersArr;
 };
 
-export const selectUserByID = (state, ids) => ids.map((id) => state.users[id]);
+export const selectUserByID = (state, ids) => {
+  if (ids.length > 1) {
+    return ids.map((id) => state.users[id]);
+  }
+  return state.users[ids];
+};
 
 export const selectFriendships = (state) => state.friendships;
 
